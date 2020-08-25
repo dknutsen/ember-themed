@@ -4,15 +4,18 @@ import Modifier from 'ember-modifier';
 export default class ThemedModifier extends Modifier {
   @service emberThemed;
 
+  get style() {
+    return this.args.positional[0];
+  }
+
   updateTheme() {
-    const { currentTheme, defaultTheme, themes } = this.emberThemed;
-    const newTheme = themes[currentTheme] ? currentTheme : defaultTheme;
-    const { add, remove } = themes[newTheme];
-    remove.forEach(r => {
-      const toRemove = [...this.element.classList].filter(c => c.includes(r));
-      toRemove.forEach(c => this.element.classList.remove(c));
-    });
-    add.forEach(c => this.element.classList.add(c));
+    const { currentTheme, lastTheme } = this.emberThemed;
+    // remove old theme styles
+    const toRemove = this.emberThemed.getThemeStyle(lastTheme, this.style);
+    toRemove.forEach(c => this.element.classList.remove(c));
+    // add new theme styles
+    const toAdd = this.emberThemed.getThemeStyle(currentTheme, this.style);
+    toAdd.forEach(c => this.element.classList.add(c));
   }
 
   didReceiveArguments() {

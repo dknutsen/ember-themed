@@ -2,24 +2,27 @@ import { action } from '@ember/object';
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
-const themes = {
-  light: {
-    add: ['transition', 'duration-500', 'ease-in-out', 'bg-white', 'text-black'],
-    remove: ['transition', 'duration-', 'ease-', 'bg-', 'text-white']
-  },
-  dark: {
-    add: ['transition', 'duration-500', 'ease-in-out', 'bg-gray-900', 'text-white'],
-    remove: ['transition', 'duration-', 'ease-', 'bg-', 'text-black'],
-  }
-};
-
 export default class ThemeService extends Service {
-  defaultTheme = 'light';
-  themes = themes;
-
+  defaultTheme = null;
+  lastTheme = null;
   @tracked currentTheme = null;
 
+  getTheme(theme) {
+    const { themes } = this;
+    if (!themes || !Object.keys(themes).length) {
+      // TODO: throw error if no themes
+      return { };
+    }
+    return themes[theme] || themes[this.defaultTheme];
+  }
+
+  getThemeStyle(theme, style = 'default') {
+    const themeStyle = this.getTheme(theme)[style];
+    return Array.isArray(themeStyle) ? themeStyle : themeStyle.split(' ');
+  }
+
   @action setTheme(newTheme) {
+    this.lastTheme = this.currentTheme;
     this.currentTheme = newTheme;
   }
 }
