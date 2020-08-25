@@ -1,7 +1,8 @@
-<h2 id="title">Welcome to Ember</h2>
+<div class="application-wrapper" {{themed}}>
+  <h2 id="title">Welcome to Ember</h2>
 
-<ThemeChooser />
+  <ThemeChooser />
 
-<div style="width:120px;height:120px;background:blue" class="something something-else" {{themed "primary"}}>
+  <div style="width:120px;height:120px" class="something something-else" {{themed "primary"}}></div>
+  {{outlet}}
 </div>
-{{outlet}}

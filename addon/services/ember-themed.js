@@ -7,6 +7,10 @@ export default class ThemeService extends Service {
   lastTheme = null;
   @tracked currentTheme = null;
 
+  get themeNames() {
+    return Object.keys(this.themes);
+  }
+
   getTheme(theme) {
     const { themes } = this;
     if (!themes || !Object.keys(themes).length) {
@@ -17,7 +21,7 @@ export default class ThemeService extends Service {
   }
 
   getThemeStyle(theme, style = 'default') {
-    const themeStyle = this.getTheme(theme)[style];
+    const themeStyle = this.getTheme(theme)[style] || [];
     return Array.isArray(themeStyle) ? themeStyle : themeStyle.split(' ');
   }
 
