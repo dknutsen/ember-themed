@@ -1,0 +1,17 @@
+<button
+  type={{@type}}
+  disabled={{@disabled}}
+  class="
+    px-2 py-1
+    {{if (eq @size "md") "px-4 py-2"}}
+    {{if (eq @size "lg") "px-5 py-3 font-xl"}}
+    {{if @disabled "opacity-50 cursor-not-allowed"}}
+  "
+  {{on "click" (optional @onClick)}}
+>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{~@label~}}
+  {{/if}}
+</button>

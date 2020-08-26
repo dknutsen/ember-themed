@@ -1,0 +1,28 @@
+<nav class="flex items-center justify-between flex-wrap bg-blue-600 p-3 pin-t fixed w-full z-20" ...attributes>
+
+  {{!-- brand --}}
+  <div class="flex items-center flex-no-shrink text-white mr-6">
+    <LinkTo @route="index" class="font-semibold text-xl tracking-tight text-white no-underline text-center">
+      ember-themed
+    </LinkTo>
+  </div>
+
+  {{!-- hamburger --}}
+  <div class="block lg:hidden">
+    <button type="button" {{action (toggle "toggleNav" this)}} class="flex items-center px-3 py-2 border rounded text-blue-300 border-blue-400 hover:text-white hover:border-white">
+      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+    </button>
+  </div>
+
+  <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto {{if this.toggleNav "block" "hidden"}}">
+    <div class="text-sm lg:flex-grow">
+      {{!-- main nav links e.g.
+      <LinkTo @route="" class="font-semibold text-xl tracking-tight text-white no-underline">
+      </LinkTo>
+      --}}
+    </div>
+
+    <div>
+    </div>
+  </div>
+</nav>

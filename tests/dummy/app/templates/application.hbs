@@ -1,6 +1,12 @@
 <div class="application-wrapper" {{themed}}>
-  <h2 id="title">Welcome to Ember</h2>
+  <UI::Navbar />
+  <div class="w-full h-16"></div>
 
+  <UI::Select @onChange={{action (mut this.selecty)}} @value={{this.selecty}} as |hello|>
+    <hello.option @label="one" @value="one" />
+    <hello.option @label="two" @value="two" />
+    <hello.option @label="three" @value="three" />
+  </UI::Select>
   <ThemeChooser />
 
   <div style="width:120px;height:120px" class="something something-else" {{themed "primary"}}></div>
