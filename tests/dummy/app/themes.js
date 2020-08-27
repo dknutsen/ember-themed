@@ -19,7 +19,7 @@ const variants = {
 Object.keys(variants).forEach(variant => {
   const color = variants[variant];
   themes.light[`alert-${variant}`] = `bg-${color}-200 text-${color}-800 border border-${color}-500`;
-  themes.dark[`alert-${variant}`] = `bg-${color}-400 text-${color}-900 border border-${color}-700`;
+  themes.dark[`alert-${variant}`] = `bg-${color}-800 text-${color}-200 border border-${color}-500`;
 });
 
 export default themes;

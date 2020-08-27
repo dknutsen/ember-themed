@@ -16,7 +16,7 @@ export default class ThemedModifier extends Modifier {
     const toRemove = this.emberThemed.getThemeStyle(lastTheme, this.style);
     if (this.style !== this._lastStyle) {
       // if style changed reset those classes too
-      toRemove.push(...this.emberThemed.getThemeStyle(lastTheme, this._lastStyle));
+      toRemove.push(...this.emberThemed.getThemeStyle(currentTheme, this._lastStyle));
       this._lastStyle = this.style;
     }
     toRemove.forEach(c => this.element.classList.remove(c));
