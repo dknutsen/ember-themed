@@ -1,0 +1,22 @@
+<article role="contentinfo" aria-label="article">
+  <header>
+    <h1 class="text-3xl font-bold mb-4">{{@title}}</h1>
+    <p>{{@subtitle}}</p>
+  </header>
+
+  <div class="font-serif leading-looser">
+    {{@text}}
+  </div>
+
+  <footer role="contentinfo" aria-label="Blog Comments">
+    <section>
+      <h1>Comments</h1>
+      {{#each @comments as |comment|}}
+        <article>
+          <h2>Comment by: <span class="name">{{comment.username}}</span></h2>
+          <p>{{comment.text}}</p>
+        </article>
+      {{/each}}
+    </section>
+  </footer>
+</article>

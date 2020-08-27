@@ -1,0 +1,8 @@
+<div class="text-sm px-4 py-2 rounded font-bold" ...attributes>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{!--{{fa-icon theme.icon class="mr-2"}}--}}
+    {{@text}}
+  {{/if}}
+</div>
