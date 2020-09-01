@@ -2,16 +2,9 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-html, body, .application-wrapper {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-h2 {
-  margin: 0;
-  padding: 0;
+code {
+  display: block;
+  white-space: pre-wrap
 }
 
 .dark {

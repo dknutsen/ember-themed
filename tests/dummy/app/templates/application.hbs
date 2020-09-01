@@ -1,45 +1,11 @@
-<div class="" {{themed}}>
+<div {{themed}}>
   <UI::Navbar {{themed "primary"}}>
     <ThemeChooser />
   </UI::Navbar>
 
   <div class="w-full h-16"></div>
 
-  <div class="container mx-auto">
-
-    <UI::Alert @text="this is a really long super obnoxious alert that needs to just go away already" {{themed this.alertTheme}}>
-      this is a really long super obnoxious alert that needs to just go away already"
-      <UI::Select @onChange={{action (mut this.alertTheme)}} @value={{this.alertTheme}} {{themed}} as |stuff|>
-        <stuff.option @label="primary" @value="alert-primary" />
-        <stuff.option @label="success" @value="alert-success" />
-        <stuff.option @label="warning" @value="alert-warning" />
-        <stuff.option @label="danger" @value="alert-danger" />
-        <stuff.option @label="default" @value="alert-default" />
-      </UI::Select>
-    </UI::Alert>
-
-    <UI::Callout {{themed this.calloutTheme}}>
-      this is a really long super obnoxious callout that needs to just go away already
-      <UI::Select @onChange={{action (mut this.calloutTheme)}} @value={{this.calloutTheme}} {{themed}} as |stuff|>
-        <stuff.option @label="primary" @value="callout-primary" />
-        <stuff.option @label="success" @value="callout-success" />
-        <stuff.option @label="warning" @value="callout-warning" />
-        <stuff.option @label="danger" @value="callout-danger" />
-        <stuff.option @label="default" @value="callout-default" />
-      </UI::Select>
-    </UI::Callout>
-
-
-    <UI::Select @onChange={{action (mut this.selecty)}} @value={{this.selecty}} {{themed}} as |hello|>
-      <hello.option @label="one" @value="one" />
-      <hello.option @label="two" @value="two" />
-      <hello.option @label="three" @value="three" />
-    </UI::Select>
-
-    {{#each (array 1 2 3 4 5 6 7 8 9 10) as |num|}}
-      <UI::Article @title={{concat "Article " num}} @text="ajlsdkfjlasdkjflkasd jflkas djflk asjdflk ajsdlfk jasldkf jaslkdf jaslkdf jlaksdfj lkasdjf alsdkfj alskdfj asldf jasldfkj asdf" />
-    {{/each}}
-
+  <main class="container mx-auto">
     {{outlet}}
-  </div>
+  </main>
 </div>

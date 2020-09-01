@@ -5,7 +5,11 @@
   </header>
 
   <div class="font-serif leading-looser">
-    {{@text}}
+    {{#if (has-block)}}
+      {{yield}}
+    {{else}}
+      {{@text}}
+    {{/if}}
   </div>
 
   <footer role="contentinfo" aria-label="Blog Comments">
