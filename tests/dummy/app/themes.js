@@ -20,8 +20,12 @@ const variants = {
 }
 Object.keys(variants).forEach(variant => {
   const color = variants[variant];
+  // alerts
   themes.light[`alert-${variant}`] = `bg-${color}-200 text-${color}-800 border border-${color}-500 ${transition}`;
   themes.dark[`alert-${variant}`] = `bg-${color}-800 text-${color}-200 border border-${color}-500 ${transition}`;
+  // callouts
+  themes.light[`callout-${variant}`] = `bg-${color}-200 text-${color}-800 border-l-4 border-${color}-500 ${transition}`;
+  themes.dark[`callout-${variant}`] = `bg-${color}-800 text-${color}-200 border-l-4 border-${color}-500 ${transition}`;
 });
 
 export default themes;

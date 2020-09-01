@@ -1,1 +1,8 @@
-{{yield}}
+<div class="text-sm px-4 py-2 rounded" ...attributes>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    <div class="font-bold">{{@title}}</div>
+    <div>{{@text}}</div>
+  {{/if}}
+</div>

@@ -18,6 +18,18 @@
       </UI::Select>
     </UI::Alert>
 
+    <UI::Callout {{themed this.calloutTheme}}>
+      this is a really long super obnoxious callout that needs to just go away already
+      <UI::Select @onChange={{action (mut this.calloutTheme)}} @value={{this.calloutTheme}} {{themed}} as |stuff|>
+        <stuff.option @label="primary" @value="callout-primary" />
+        <stuff.option @label="success" @value="callout-success" />
+        <stuff.option @label="warning" @value="callout-warning" />
+        <stuff.option @label="danger" @value="callout-danger" />
+        <stuff.option @label="default" @value="callout-default" />
+      </UI::Select>
+    </UI::Callout>
+
+
     <UI::Select @onChange={{action (mut this.selecty)}} @value={{this.selecty}} {{themed}} as |hello|>
       <hello.option @label="one" @value="one" />
       <hello.option @label="two" @value="two" />
