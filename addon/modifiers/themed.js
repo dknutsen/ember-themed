@@ -11,20 +11,22 @@ export default class ThemedModifier extends Modifier {
     return this.args.positional[0];
   }
 
+  get theme() {
+    return this.args.named.theme || this.emberThemed.currentTheme;
+  }
+
   updateTheme() {
-    const { currentTheme } = this.emberThemed;
-    const { _lastTheme, _lastStyle } = this;
-    // remove old theme styles
-    if (this._lastStyle !== this.style) {
-      this._lastStyle = this.style;
+    const { _lastTheme, _lastStyle, theme, style } = this;
+    if (this._lastStyle !== style) {
+      this._lastStyle = style;
     }
-    if (this._lastTheme !== currentTheme) {
-      this._lastTheme = currentTheme;
+    if (this._lastTheme !== theme) {
+      this._lastTheme = theme;
     }
     const toRemove = this.emberThemed.getThemeStyle(_lastTheme, _lastStyle);
     toRemove.forEach(c => this.element.classList.remove(c));
     // add new theme styles
-    const toAdd = this.emberThemed.getThemeStyle(currentTheme, this.style);
+    const toAdd = this.emberThemed.getThemeStyle(theme, style);
     toAdd.forEach(c => this.element.classList.add(c));
   }
 
