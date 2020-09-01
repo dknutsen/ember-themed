@@ -4,6 +4,7 @@ import Modifier from 'ember-modifier';
 export default class ThemedModifier extends Modifier {
   @service emberThemed;
 
+  _lastTheme = null;
   _lastStyle = null;
 
   get style() {
@@ -11,14 +12,16 @@ export default class ThemedModifier extends Modifier {
   }
 
   updateTheme() {
-    const { currentTheme, lastTheme } = this.emberThemed;
+    const { currentTheme } = this.emberThemed;
+    const { _lastTheme, _lastStyle } = this;
     // remove old theme styles
-    const toRemove = this.emberThemed.getThemeStyle(lastTheme, this.style);
-    if (this.style !== this._lastStyle) {
-      // if style changed reset those classes too
-      toRemove.push(...this.emberThemed.getThemeStyle(currentTheme, this._lastStyle));
+    if (this._lastStyle !== this.style) {
       this._lastStyle = this.style;
     }
+    if (this._lastTheme !== currentTheme) {
+      this._lastTheme = currentTheme;
+    }
+    const toRemove = this.emberThemed.getThemeStyle(_lastTheme, _lastStyle);
     toRemove.forEach(c => this.element.classList.remove(c));
     // add new theme styles
     const toAdd = this.emberThemed.getThemeStyle(currentTheme, this.style);
