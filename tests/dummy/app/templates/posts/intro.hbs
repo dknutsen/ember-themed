@@ -1,2 +1,60 @@
-<UI::Article @title="Introduction">
+<UI::Article @title="Introduction & Quickstart" as |article|>
+
+  <article.paragraph>Ember Themed is a lightweight addon for easily theming an Ember app. It does not impose any rules on your </article.paragraph>
+
+
+  <article.subheading @label="Installation" />
+  <article.code>
+ember install ember-themed
+  </article.code>
+
+  <article.paragraph>
+    In addition to installing the addon this will run the default addon blueprint which adds two files to your project:
+  </article.paragraph>
+
+  <article.list as |item|>
+    <item><span class="font-mono">app/themes.js</span> &mdash; this is where you can defined your themes.</item>
+    <item><span class="font-mono">app/services/ember-themed.js</span> &mdash; this extends the addon service and hands your themes to it.</item>
+  </article.list>
+
+  <UI::Callout class="mb-4" {{themed "callout-primary"}}>
+    <article.paragraph>
+    If the default blueprint was unable to run you will need to run it manually to generate the files with the following command:
+    </article.paragraph>
+
+    <article.code>
+ember generate ember-themed
+    </article.code>
+  </UI::Callout>
+
+
+  <article.subheading id="config" @label="Configuration" />
+
+
+  <article.subheading @label="Usage" />
+
+  <article.code>
+// app/themes.js
+export default {
+  light: {
+    default: ''
+  },
+  dark: {
+    default: ''
+  }
+}
+  </article.code>
+
+  <article.code>
+// app/themes.js
+export default {
+  light: {
+    default: ''
+  },
+  dark: {
+    default: ''
+  }
+}
+  </article.code>
+
 </UI::Article>

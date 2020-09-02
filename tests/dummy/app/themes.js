@@ -1,13 +1,13 @@
-const transition = 'transition-colors duration-500 ease-in-out';
+const transition = 'transition-colors duration-1000 ease-in-out';
 
 const themes = {
   light: {
     default: `bg-white text-black ${transition}`,
-    primary: `bg-blue-500 text-white ${transition}`,
+    code: `bg-gray-200 text-black ${transition}`,
   },
   dark: {
     default: `bg-gray-900 text-white ${transition}`,
-    primary: `bg-blue-600 text-white ${transition}`,
+    code: `bg-gray-800 text-white ${transition}`,
   }
 };
 
