@@ -1,27 +1,37 @@
 <UI::Article @title="Introduction & Quickstart" as |article|>
 
-  <article.paragraph>Ember Themed is a lightweight addon for easily theming an Ember app. It does not impose any rules on your </article.paragraph>
+  <article.paragraph>
+    Ember Themed is a lightweight addon for easily theming an Ember app. It is meant to be a declarative and dead-simple way to add and change color themes and makes supporting multiple themes (light and dark mode, for example) trivial to implement. It does not impose any rules on your styles is completely agnostic to CSS frameworks.
+  </article.paragraph>
+  <article.paragraph>
+    Ember Themed works by defining "themes" and setting a current theme which is global for the app. Each "theme" has one or more "styles", a default style as well as custom styles for situations where the default style isn't what you want for a specific element or component. For example if you have a "dark mode" theme that sets background color to very dark grey and text color to white, you may need an alternate style for how an error alert should look in dark mode.
+  </article.paragraph>
+  <article.paragraph>
+    Once you define your theme(s) and styles, applying them to an element or component is as simple as adding the <code>&#123;&#123;themed&#125;&#125;</code> modifier, which will manage adding and removing the correct CSS classes if and when the theme or style changes.
+  </article.paragraph>
+  <article.paragraph>
+    This allows you to keep your template and component code free of theme-related args, glue code, and classes. The biggest benefit, however, is that supporting more than one theme and changing themes at "runtime" is trivial and requires no modification to app code once you've applied the modifier where it needs to go.
+  </article.paragraph>
+  <article.paragraph>
+    To get started with Ember Themed just follow the instructions below. For more details and examples refer to the other guides pages and also check out the <a class="underline" href="https://github.com/dknutsen/ember-themed/tree/master/tests/dummy/app">dummy app source</a>.
+  </article.paragraph>
 
 
   <article.subheading @label="Installation" />
   <article.code>
 ember install ember-themed
   </article.code>
-
   <article.paragraph>
     In addition to installing the addon this will run the default addon blueprint which adds two files to your project:
   </article.paragraph>
-
   <article.list as |item|>
     <item><span class="font-mono">app/themes.js</span> &mdash; this is where you can defined your themes.</item>
     <item><span class="font-mono">app/services/ember-themed.js</span> &mdash; this extends the addon service and hands your themes to it.</item>
   </article.list>
-
   <UI::Callout class="mb-4" {{themed "callout-primary"}}>
     <article.paragraph>
-    If the default blueprint was unable to run you will need to run it manually to generate the files with the following command:
+      If the default blueprint was unable to run you will need to run it manually to generate the files with the following command:
     </article.paragraph>
-
     <article.code>
 ember generate ember-themed
     </article.code>
@@ -29,32 +39,52 @@ ember generate ember-themed
 
 
   <article.subheading id="config" @label="Configuration" />
-
+  <article.paragraph>
+    Themes are defined in the <code>app/themes.js</code> file added by the blueprint. This file exports a POJO where each top-level key is a theme name, and the value is the theme itself. Each theme must contain a 'default' styleand zero or more alternate styles. A style is given a name via its key, and the value must be either an array of strings or a space-delimted string of one or more CSS class names to apply for that theme/style combination. For example:
+  </article.paragraph>
+  <article.code>
+// app/themes.js
+export default {
+  // "traditional" CSS classes, expressed as an array of strings
+  light: {
+    default: ['light-theme'],
+    error-card: ['error', 'danger-text']
+  },
+  // tailwind (utility CSS) classes, expressed as space delimted strings
+  dark: {
+    default: 'bg-gray-900 text-white transition duration-500 ease-in-out',
+    error-card: 'bg-red-800 text-white transition duration-500 ease-in-out'
+  }
+}
+  </article.code>
+  <article.paragraph>
+    Here we are defining two themes: "light" and "dark". Both themes define two "styles": "default" and "error-card". The light theme is a hypothetical example of using one or two traditional CSS classes to style the component based on theme. The dark theme is using Tailwind utility CSS classes to define the style. Also worth noting is that the light theme is using an array of strings to define classes for the styles while the dark theme is simply using a single space-delimeted string for each style. These can be used interchangeably based on your preference.
+  </article.paragraph>
+  <article.paragraph>
+    This is a very simply and fairly contrived example of theme definition. For more advanced examples and ideas check out the page on [defining themes] or the example themes file in the project dummy app that generates the themes for this documentation site.
+  </article.paragraph>
 
   <article.subheading @label="Usage" />
-
+  <article.paragraph>
+    To apply a "style" to an element or component simply add the "themed" modifier to it as follows:
+  </article.paragraph>
   <article.code>
-// app/themes.js
-export default {
-  light: {
-    default: ''
-  },
-  dark: {
-    default: ''
-  }
-}
+    &lt;div class="user-card" \{{themed}}&gt;
+      ...
+    &lt;/div&gt;
+  </article.code>
+  <article.paragraph>
+    The above example will apply the default style for the current theme. To apply an alternate style add the style name as the first positional arg to the modifier:
+  </article.paragraph>
+  <article.code>
+    &lt;div class="user-card" \{{themed "error-card"}}&gt;
+      ...
+    &lt;/div&gt;
   </article.code>
 
-  <article.code>
-// app/themes.js
-export default {
-  light: {
-    default: ''
-  },
-  dark: {
-    default: ''
-  }
-}
-  </article.code>
+  <article.subheading @label="Recommendations" />
+  - each style should have a definition under each theme (if you do not assign a variant value for a theme it will use the default).
+  - keeping presentation and business logic is often considered a good practice, and as such it makes sense to keep the themed modifier applied to UI (presentation-only) components as much as possible
+  - use variants and string interpolation to prevent repeating frequently used styles (see dummy app themes)
 
 </UI::Article>

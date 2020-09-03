@@ -1,5 +1,12 @@
 const transition = 'transition-colors duration-1000 ease-in-out';
 
+const variants = {
+  primary: 'blue',
+  success: 'green',
+  warning: 'yellow',
+  danger: 'red',
+  default: 'gray'
+}
 const themes = {
   light: {
     default: `bg-white text-black ${transition}`,
@@ -8,16 +15,10 @@ const themes = {
   dark: {
     default: `bg-gray-900 text-white ${transition}`,
     code: `bg-gray-800 text-white ${transition}`,
+    //...generateVariants('callout', variants, (color) => `bg-${color}-200`)
   }
 };
 
-const variants = {
-  primary: 'blue',
-  success: 'green',
-  warning: 'yellow',
-  danger: 'red',
-  default: 'gray'
-}
 Object.keys(variants).forEach(variant => {
   const color = variants[variant];
   // alerts
