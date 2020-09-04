@@ -1,10 +1,7 @@
-<div {{themed}}>
-  <UI::Navbar>
-    <ThemeChooser />
-  </UI::Navbar>
-
-  <div class="w-full h-16"></div>
-
+<UI::Navbar>
+  <ThemeChooser />
+</UI::Navbar>
+<div class="pb-6 pt-24" {{themed}}>
   <main class="px-4 md:px-0 md:w-2/3 lg:w-1/2 mx-auto">
     {{outlet}}
   </main>
