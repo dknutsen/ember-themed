@@ -6,9 +6,14 @@ export default class ThemedModifier extends Modifier {
 
   _lastTheme = null;
   _lastStyle = null;
+  _lastVariant = null;
 
   get style() {
     return this.args.positional[0];
+  }
+
+  get variant() {
+    return this.args.positional[1];
   }
 
   get theme() {
@@ -16,17 +21,22 @@ export default class ThemedModifier extends Modifier {
   }
 
   updateTheme() {
-    const { _lastTheme, _lastStyle, theme, style } = this;
+    const { _lastTheme, _lastStyle, _lastVariant, theme, style, variant } = this;
     if (this._lastStyle !== style) {
       this._lastStyle = style;
+    }
+    if (this._lastVariant !== variant) {
+      this._lastVariant = variant;
     }
     if (this._lastTheme !== theme) {
       this._lastTheme = theme;
     }
-    const toRemove = this.emberThemed.getThemeStyle(_lastTheme, _lastStyle);
+    const fullLastStyle = _lastStyle ? `${_lastStyle}${_lastVariant ? '-' + _lastVariant : ''}` : null;
+    const toRemove = this.emberThemed.getThemeStyle(_lastTheme, fullLastStyle);
     toRemove.forEach(c => this.element.classList.remove(c));
     // add new theme styles
-    const toAdd = this.emberThemed.getThemeStyle(theme, style);
+    const fullNewStyle = style ? `${style}${variant ? '-' + variant : ''}` : null;
+    const toAdd = this.emberThemed.getThemeStyle(theme, fullNewStyle);
     toAdd.forEach(c => this.element.classList.add(c));
   }
 

@@ -20,7 +20,8 @@ export default class ThemeService extends Service {
   }
 
   getThemeStyle(theme, style = 'default') {
-    const themeStyle = this.getTheme(theme)[style] || [];
+    const currentTheme = this.getTheme(theme)
+    const themeStyle = currentTheme[style] || currentTheme.default;
     return Array.isArray(themeStyle) ? themeStyle : themeStyle.split(' ');
   }
 
