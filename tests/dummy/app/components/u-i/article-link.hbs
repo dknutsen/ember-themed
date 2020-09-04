@@ -1,8 +1,9 @@
-<article class="mb-4">
+<article class="mb-8 flex flex-col">
   <LinkTo
-    class="text-3xl mb-4"
-    @route={{@route}}
-  >
+    class="text-3xl mb-2"
+    @route={{@route}}>
     {{~@title~}}
   </LinkTo>
+  <p class="mb-2">{{@snippet}}</p>
+  <LinkTo class="underline" @route={{@route}}>Read more...</LinkTo>
 </article>

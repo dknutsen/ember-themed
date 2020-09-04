@@ -9,5 +9,6 @@ export default class Router extends EmberRouter {
 Router.map(function() {
   this.route('posts', function() {
     this.route('intro');
+    this.route('config');
   });
 });

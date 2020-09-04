@@ -1,28 +1,19 @@
-<UI::Alert @text="this is a really long super obnoxious alert that needs to just go away already" {{themed this.alertTheme}}>
-  this is a really long super obnoxious alert that needs to just go away already
-  <UI::Select @onChange={{action (mut this.alertTheme)}} @value={{this.alertTheme}} {{themed}} as |stuff|>
-    <stuff.option @label="primary" @value="alert-primary" />
-    <stuff.option @label="success" @value="alert-success" />
-    <stuff.option @label="warning" @value="alert-warning" />
-    <stuff.option @label="danger" @value="alert-danger" />
-    <stuff.option @label="default" @value="alert-default" />
-  </UI::Select>
-</UI::Alert>
-
-<UI::Callout {{themed this.calloutTheme}}>
-  this is a really long super obnoxious callout that needs to just go away already
-  <UI::Select @onChange={{action (mut this.calloutTheme)}} @value={{this.calloutTheme}} {{themed}} as |stuff|>
-    <stuff.option @label="primary" @value="callout-primary" />
-    <stuff.option @label="success" @value="callout-success" />
-    <stuff.option @label="warning" @value="callout-warning" />
-    <stuff.option @label="danger" @value="callout-danger" />
-    <stuff.option @label="default" @value="callout-default" />
-  </UI::Select>
-</UI::Callout>
-
 <UI::ArticleList as |list|>
-  <list.article @route="posts.intro" @title="Introduction" />
-  <list.article @route="posts.intro" @title="Configuring themes" />
+  <list.article
+    @route="posts.intro"
+    @title="Introduction"
+    @snippet="An introduction to the basic concepts and how to get started"
+  />
+  <list.article
+    @route="posts.config"
+    @title="Configuring themes"
+    @snippet="A more detailed look at configuring themes"
+  />
+  <list.article
+    @route="posts.intro"
+    @title="Applying themes"
+    @snippet="A more detailed look at applying the configured themes with the themed modifier"
+  />
 </UI::ArticleList>
 
 {{outlet}}

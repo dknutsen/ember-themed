@@ -1,0 +1,29 @@
+<UI::Article @title="Theme Configuration" as |article|>
+
+  <article.subheading id="config" @label="Configuration" />
+  <article.paragraph>
+    Themes are defined in the <code>app/themes.js</code> file added by the blueprint. This file exports a POJO where each top-level key is a theme name, and the value is the theme itself. Each theme must contain a 'default' style and zero or more alternate styles. A style is given a name via its key, and the value must be either an array of strings or a space-delimted string of one or more CSS class names to apply for that theme/style combination. For example:
+  </article.paragraph>
+  <article.code>
+// app/themes.js
+export default {
+  // "traditional" CSS classes, expressed as an array of strings
+  light: {
+    default: ['light-theme'],
+    error-card: ['error', 'danger-text']
+  },
+  // tailwind (utility CSS) classes, expressed as space delimted strings
+  dark: {
+    default: 'bg-gray-900 text-white transition duration-500 ease-in-out',
+    error-card: 'bg-red-800 text-white transition duration-500 ease-in-out'
+  }
+}
+  </article.code>
+  <article.paragraph>
+    Here we are defining two themes: "light" and "dark". Both themes define two "styles": "default" and "error-card". The light theme is a hypothetical example of using one or two traditional CSS classes to style the component based on theme. The dark theme is using Tailwind utility CSS classes to define the style. Also worth noting is that the light theme is using an array of strings to define classes for the styles while the dark theme is simply using a single space-delimeted string for each style. These can be used interchangeably based on your preference.
+  </article.paragraph>
+  <article.paragraph>
+    This is a very simple and contrived example of theme definition. For more advanced examples and ideas check out the page on [defining themes] or the example themes file in the project dummy app that generates the themes for this documentation site.
+  </article.paragraph>
+
+</UI::Article>
