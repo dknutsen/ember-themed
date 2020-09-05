@@ -86,7 +86,7 @@ export default class ThemeChooserComponent extends Component {
   <article.code>
    light: {
      default: '...',
-+    callout: 'bg-gray-200 text-gray-800 border-gray-500'
++    callout: 'bg-gray-200 text-gray-800 border-gray-500',
      ...
    }
   </article.code>
@@ -114,12 +114,12 @@ export default class ThemeChooserComponent extends Component {
   <article.code>
    light: {
      default: '...',
--    callout: 'bg-gray-200 text-gray-800 border-gray-500'
-+    callout-default: 'bg-gray-200 text-gray-800 border-gray-500'
-+    callout-primary: 'bg-blue-200 text-blue-800 border-blue-500'
-+    callout-success: 'bg-green-200 text-green-800 border-green-500'
-+    callout-warning: 'bg-yellow-200 text-yellow-800 border-yellow-500'
-+    callout-danger: 'bg-red-200 text-red-800 border-red-500'
+-    callout: 'bg-gray-200 text-gray-800 border-gray-500',
++    callout-default: 'bg-gray-200 text-gray-800 border-gray-500',
++    callout-primary: 'bg-blue-200 text-blue-800 border-blue-500',
++    callout-success: 'bg-green-200 text-green-800 border-green-500',
++    callout-warning: 'bg-yellow-200 text-yellow-800 border-yellow-500',
++    callout-danger: 'bg-red-200 text-red-800 border-red-500',
      ...
    }
   </article.code>
@@ -140,12 +140,12 @@ export default class ThemeChooserComponent extends Component {
  const themes = {
    light: {
      default: '...',
--    callout-default: 'bg-gray-200 text-gray-800 border-gray-500'
--    callout-primary: 'bg-blue-200 text-blue-800 border-blue-500'
--    callout-success: 'bg-green-200 text-green-800 border-green-500'
--    callout-warning: 'bg-yellow-200 text-yellow-800 border-yellow-500'
--    callout-danger: 'bg-red-200 text-red-800 border-red-500'
-+    ...generateVariants('callout', variants, (color) => `bg-${color}-200 text-${color}-800 border-${color}-500 ${transition}`)
+-    callout-default: 'bg-gray-200 text-gray-800 border-gray-500',
+-    callout-primary: 'bg-blue-200 text-blue-800 border-blue-500',
+-    callout-success: 'bg-green-200 text-green-800 border-green-500',
+-    callout-warning: 'bg-yellow-200 text-yellow-800 border-yellow-500',
+-    callout-danger: 'bg-red-200 text-red-800 border-red-500',
++    ...generateVariants('callout', variants, (color) => `bg-${color}-200 text-${color}-800 border-${color}-500 ${transition}`),
      ...
    }
   </article.code>
