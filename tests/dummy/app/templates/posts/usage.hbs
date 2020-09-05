@@ -1,0 +1,46 @@
+<UI::Article @title="Applying Themes & Styles" as |article|>
+
+  <article.subheading @label="Applying Styles" />
+  <article.paragraph>
+    To apply a theme to an element or component simply add the "themed" modifier to it:
+  </article.paragraph>
+  <article.code>
+&lt;div class="user-card" \{{themed}}&gt;
+  ...
+&lt;/div&gt;
+  </article.code>
+  <article.paragraph>
+    This will apply the default style from the current theme. To apply an alternate style (see the page on <LinkTo class="underline" @route="posts.config">configuring themes</LinkTo>) add the style name as the first positional arg to the modifier.
+  </article.paragraph>
+  <article.code>
+&lt;div class="user-card" \{{themed "outline-button"}}&gt;
+  ...
+&lt;/div&gt;
+  </article.code>
+  <article.paragraph>
+    This will apply the "outline-button" style from the current theme. Style argument can be a static string or a dynamic (bound) value.
+  </article.paragraph>
+
+
+  <article.subheading @label="Applying Style Variants" />
+  <article.paragraph>
+    If you define style variants they can be applied as the second positional argument to the modifier (see the page on <LinkTo class="underline" @route="posts.config">configuring themes</LinkTo> for how to define variants). Like the style argument the variant can be static or dynamic.
+  </article.paragraph>
+  <article.code>
+&lt;div class="user-card" \{{themed "outline-button" "danger"}}&gt;
+  ...
+&lt;/div&gt;
+  </article.code>
+
+
+  <article.subheading @label="Overriding the Global Theme" />
+  <article.paragraph>
+    In general the theme is meant to be configured globally via the service, however it is possible to override the theme on an individual modifier instance with the "theme" named argument. This can be useful in a situation where you need an element to be apply a different theme in a certain context or permanently. The argument can be static or dynamic. An example:
+  </article.paragraph>
+  <article.code>
+&lt;div class="user-card" \{{themed theme="dark"}}&gt;
+  ...
+&lt;/div&gt;
+  </article.code>
+
+</UI::Article>

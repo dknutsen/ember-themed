@@ -25,8 +25,8 @@ ember install ember-themed
     In addition to installing the addon this will run the default addon blueprint which adds two files to your project:
   </article.paragraph>
   <article.list as |item|>
-    <item><span class="font-mono">app/themes.js</span> &mdash; this is where you can defined your themes.</item>
-    <item><span class="font-mono">app/services/ember-themed.js</span> &mdash; this extends the addon service and hands your themes to it.</item>
+    <item><UI::InlineCode @code="app/themes.js"/> &mdash; this is where you can defined your themes.</item>
+    <item><UI::InlineCode @code="app/services/ember-themed.js"/> &mdash; this extends the addon service and hands your themes to it.</item>
   </article.list>
   <UI::Callout class="mb-4" {{themed "callout-primary"}}>
     <article.paragraph>
@@ -61,7 +61,7 @@ export default {
     Here we are defining two themes: "light" and "dark". Both themes define two "styles": "default" and "error-card". The light theme is a hypothetical example of using one or two traditional CSS classes to style the component based on theme. The dark theme is using Tailwind utility CSS classes to define the style. Also worth noting is that the light theme is using an array of strings to define classes for the styles while the dark theme is simply using a single space-delimeted string for each style. These can be used interchangeably based on your preference.
   </article.paragraph>
   <article.paragraph>
-    This is a very simple and contrived example of theme definition. For more advanced examples and ideas check out the page on [defining themes] or the example themes file in the project dummy app that generates the themes for this documentation site.
+    This is a very simple and contrived example of theme definition. For more advanced examples and ideas check out the page on <LinkTo class="underline" @route="posts.config">defining themes</LinkTo> or the example themes file in the project dummy app that generates the themes for this documentation site.
   </article.paragraph>
 
   <article.subheading @label="Usage" />
@@ -81,11 +81,8 @@ export default {
   ...
 &lt;/div&gt;
   </article.code>
+  <article.paragraph>
+    For more advanced modifier usage see the page on <LinkTo class="underline" @route="posts.usage">applying styles</LinkTo>.
+  </article.paragraph>
 
-  <article.subheading @label="Recommendations" />
-  <article.list as |item|>
-    <item>each style should have a definition under each theme (if you do not assign a variant value for a theme it will use the default).</item>
-    <item>keeping presentation and business logic is often considered a good practice, and as such it makes sense to keep the themed modifier applied to UI (presentation-only) components as much as possible</item>
-    <item>use variants and string interpolation to prevent repeating frequently used styles (see dummy app themes)</item>
-  </article.list>
 </UI::Article>

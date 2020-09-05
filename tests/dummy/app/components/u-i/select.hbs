@@ -1,3 +1,7 @@
-<select {{on "change" (pick "target.value" @onChange)}} ...attributes>
+<select
+  class="appearance-non py-1 px-2 rounded leading-tight focus:outline-none"
+  ...attributes
+  {{on "change" (pick "target.value" @onChange)}}
+>
   {{yield (hash option=(component "u-i/select/option" currentValue=@value))}}
 </select>

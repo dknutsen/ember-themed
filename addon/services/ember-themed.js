@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ThemeService extends Service {
   defaultTheme = null;
-  @tracked currentTheme = null;
+  @tracked currentTheme = this.defaultTheme;
 
   get themeNames() {
     return Object.keys(this.themes);

@@ -1,42 +1,178 @@
 <UI::Article @title="Theme Configuration" as |article|>
 
-  <article.subheading id="config" @label="Configuration" />
+  <article.subheading id="config" @label="Basic Configuration" />
   <article.paragraph>
-    Themes are defined in the <code>app/themes.js</code> file added by the blueprint. This file exports a POJO where each top-level key is a theme name, and the value is the theme itself. Each theme must contain a 'default' style and zero or more alternate styles. A style is given a name via its key, and the value must be either an array of strings or a space-delimted string of one or more CSS class names to apply for that theme/style combination. For example:
+    Themes are defined in the <UI::InlineCode @code="app/themes.js"/> file added by the blueprint. This file exports a POJO where each top-level key is a theme name, and the value is the theme itself. Each theme must contain a 'default' style and zero or more alternate styles. A style is given a name via its key, and the value must be either an array of strings or a space-delimted string of one or more CSS class names to apply for that theme/style combination.
+  </article.paragraph>
+  <article.paragraph>
+    The most basic configuration for a single theme with only one default style might look something like this:
   </article.paragraph>
   <article.code>
 // app/themes.js
 export default {
-  // "traditional" CSS classes, expressed as an array of strings
-  light: {
-    default: ['light-theme'],
-    error-card: ['error', 'danger-text']
-  },
-  // tailwind (utility CSS) classes, expressed as space delimted strings
   dark: {
     default: 'bg-gray-900 text-white transition duration-500 ease-in-out',
-    error-card: 'bg-red-800 text-white transition duration-500 ease-in-out'
   }
 }
   </article.code>
   <article.paragraph>
-    Here we are defining two themes: "light" and "dark". Both themes define two "styles": "default" and "error-card". The light theme is a hypothetical example of using one or two traditional CSS classes to style the component based on theme. The dark theme is using Tailwind utility CSS classes to define the style. Also worth noting is that the light theme is using an array of strings to define classes for the styles while the dark theme is simply using a single space-delimeted string for each style. These can be used interchangeably based on your preference.
+    It's also a good idea to change the default theme, which is configured in the service:
+  </article.paragraph>
+  <article.code>
+// app/services/ember-themed.js
+export default class ThemeService extends EmberThemedService {
+  defaultTheme = 'light';
+  ...
+}
+  </article.code>
+
+
+  <article.subheading id="config" @label="Configuring Multiple Themes" />
+  <article.paragraph>
+    Adding an additional theme means adding an additional name/object pair to the themes config. For example three themes (with styles excluded for brevity) would look like this:
+  </article.paragraph>
+  <article.code>
+// app/themes.js
+export default {
+  light: {
+    ...
+  },
+  dark: {
+    ...
+  },
+  "orange sunshine": {
+    ...
+  }
+}
+  </article.code>
+
+
+  <article.subheading id="config" @label="Managing the Current Theme" />
+  <article.paragraph>
+    Listing available themes and managing the current theme can be done via the <UI::InlineCode @code="emberThemed"/> service. The service provides a property <UI::InlineCode @code="themeNames"/> which returns an array of all defined theme names, a property <UI::InlineCode @code="currentTheme"/> which returns the name of the current theme, and an action <UI::InlineCode @code="setTheme"/> which accepts the name of the theme to switch to. The theme can be changed anywhere the service can be injected, for example a theme chooser component for setting a user selectable theme, or perhaps a route hook for changing theme based on app navigation or routing state.
   </article.paragraph>
   <article.paragraph>
-    This is a very simple and contrived example of theme definition. For more advanced examples and ideas check out the page on [defining themes] or the example themes file in the project dummy app that generates the themes for this documentation site.
+    An example of a simple theme chooser component that uses a select component could look like this:
   </article.paragraph>
+  <article.code>
+// app/components/theme-chooser.js
+import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
+
+export default class ThemeChooserComponent extends Component {
+  @service emberThemed;
+}
+
+// app/components/theme-chooser.hbs
+&lt;UI::Select
+  @onChange=\{{this.emberThemed.setTheme}}
+  @value=\{{this.emberThemed.currentTheme}}
+  as |sel|
+&gt;
+  \{{#each this.emberThemed.themeNames as |theme|}}
+    &lt;sel.option @label=\{{theme}} @value=\{{theme}} /&gt;
+  \{{/each}}
+&lt;/UI::Select&gt;
+  </article.code>
+
+
+  <article.subheading @label="Defining Alternate Styles" />
+  <article.paragraph>
+    Each theme has a default style which may work for a lot of the basic text content in an app, but there are number of cases where you may want to apply different color styles to some elements or components. For example a callout alert might require a colored background, colored text, and a colored left border that are all different from the default style. For these cases you can define alternate styles under each theme. Just like the default style they are keyed by name and the value must be either a string of space delimited CSS classes, or an array of CSS classes. For example in the fictional "orange sunshine" theme we could define a style specifically for an outline-style button:
+  </article.paragraph>
+  <article.paragraph>
+    For example if we had a callout alert component and wanted to theme it, we could add a "light" theme style for it like this:
+  </article.paragraph>
+  <article.code>
+   light: {
+     default: '...',
++    callout: 'bg-gray-200 text-gray-800 border-gray-500'
+     ...
+   }
+  </article.code>
+  <article.paragraph>
+    Note that this is only defining color classes, it is probably best to set layout and border size on the component itself as they probably won't change between themes (though they could be set here if you wanted). See the resulting callout here using this simple invocation: <UI::InlineCode @code="&lt;UI::Callout \{{themed 'callout'}}&gt;This is a sample callout&lt;/UI::Callout&gt;"/>
+  </article.paragraph>
+  <UI::Callout {{themed "callout" "default"}} class="mb-4 w-64 mx-auto">
+    This is a sample callout
+  </UI::Callout>
+  <article.paragraph>
+    Also notice how it changes if you change the current theme via the theme chooser in the navbar.
+  </article.paragraph>
+  <UI::Callout {{themed "callout" "primary"}}>
+    It is recommended that if you define a style in one theme you define the same style in all other themes. If a style cannot be found in the current theme the modifier will choose the default style.
+  </UI::Callout>
 
 
   <article.subheading @label="Style Variants" />
+  <article.paragraph>
+    The callout example above works great if all the callouts look the same, but what if you want a variety of different callout styles that have <i>almost</i> the same style but with different colors? For example a red callout to signal an error or something very important? For that Ember Themed introduces the concept of "variants". Variants are simply styles with a common prefix that share almost all of the same classes.
+  </article.paragraph>
+  <article.paragraph>
+    You could define boostrap-like color variants for a callout manually like the following:
+  </article.paragraph>
+  <article.code>
+   light: {
+     default: '...',
+-    callout: 'bg-gray-200 text-gray-800 border-gray-500'
++    callout-default: 'bg-gray-200 text-gray-800 border-gray-500'
++    callout-primary: 'bg-blue-200 text-blue-800 border-blue-500'
++    callout-success: 'bg-green-200 text-green-800 border-green-500'
++    callout-warning: 'bg-yellow-200 text-yellow-800 border-yellow-500'
++    callout-danger: 'bg-red-200 text-red-800 border-red-500'
+     ...
+   }
+  </article.code>
+  <article.paragraph>
+    However you can easily imagine this becoming tedious or error-prone as there is a lot of repetition. To make things easier Ember Themed provides a <UI::InlineCode @code="generateVariants"/> utility function which can be used to create variants more easily:
+  </article.paragraph>
+  <article.code>
++import generateVariants from 'ember-themed/utils/generate-variants';
++const variants = {
++  primary: 'blue',
++  success: 'green',
++  warning: 'yellow',
++  danger: 'red',
++  default: 'gray'
++}
+ const transition = 'transition-colors duration-1000 ease-in-out';
+
+ const themes = {
+   light: {
+     default: '...',
+-    callout-default: 'bg-gray-200 text-gray-800 border-gray-500'
+-    callout-primary: 'bg-blue-200 text-blue-800 border-blue-500'
+-    callout-success: 'bg-green-200 text-green-800 border-green-500'
+-    callout-warning: 'bg-yellow-200 text-yellow-800 border-yellow-500'
+-    callout-danger: 'bg-red-200 text-red-800 border-red-500'
++    ...generateVariants('callout', variants, (color) => `bg-${color}-200 text-${color}-800 border-${color}-500 ${transition}`)
+     ...
+   }
+  </article.code>
+  <article.paragraph>
+    The utility accepts the style name ("callout" in this case), an object of variant -> color mappings, and a function which, given a color, returns the classes to use for that style/variant combination. Using the spread operator to include the variants in the theme is a convenient way to define the variants inline but isn't necessary.
+  </article.paragraph>
+  <article.paragraph>
+    The modifier also supports a variant as the second position argument. So to specify a callout with the "danger" variant you could invoke the modifier like this:
+  </article.paragraph>
+  <article.code>
+&lt;UI::Callout \{{themed "callout" "danger"}}&gt;...&lt;/UI::Callout&gt;
+  </article.code>
+  <article.paragraph>
+    The variant can also be a dynamic value. Below is an example of a callout with a dynamically selectable variant. Again, notice how the color changes not only based on variant but also based on the selected theme (selectable via the theme chooser in the navbar).
+  </article.paragraph>
+
   <UI::Callout {{themed "callout" this.calloutVariant}}>
-    this is a really long super obnoxious callout that needs to just go away already
-    <UI::Select @onChange={{action (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
-      <stuff.option @label="primary" @value="primary" />
-      <stuff.option @label="success" @value="success" />
-      <stuff.option @label="warning" @value="warning" />
-      <stuff.option @label="danger" @value="danger" />
-      <stuff.option @label="default" @value="default" />
-    </UI::Select>
+    <div class="flex justify-between items-center">
+      This callout is using the "callout" style with dynamic variant, try changing the variant with the select:
+      <UI::Select @onChange={{action (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
+        <stuff.option @label="default" @value="default" />
+        <stuff.option @label="primary" @value="primary" />
+        <stuff.option @label="success" @value="success" />
+        <stuff.option @label="warning" @value="warning" />
+        <stuff.option @label="danger" @value="danger" />
+      </UI::Select>
+    </div>
   </UI::Callout>
 
 </UI::Article>
