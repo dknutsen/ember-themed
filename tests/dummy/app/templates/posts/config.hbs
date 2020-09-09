@@ -129,13 +129,12 @@ export default class ThemeChooserComponent extends Component {
   <article.code>
 +import generateVariants from 'ember-themed/utils/generate-variants';
 +const variants = {
++  default: 'gray'
 +  primary: 'blue',
 +  success: 'green',
 +  warning: 'yellow',
 +  danger: 'red',
-+  default: 'gray'
 +}
- const transition = 'transition-colors duration-1000 ease-in-out';
 
  const themes = {
    light: {
@@ -145,7 +144,7 @@ export default class ThemeChooserComponent extends Component {
 -    callout-success: 'bg-green-200 text-green-800 border-green-500',
 -    callout-warning: 'bg-yellow-200 text-yellow-800 border-yellow-500',
 -    callout-danger: 'bg-red-200 text-red-800 border-red-500',
-+    ...generateVariants('callout', variants, (color) => `bg-${color}-200 text-${color}-800 border-${color}-500 ${transition}`),
++    ...generateVariants('callout', variants, (color) => `bg-${color}-200 text-${color}-800 border-${color}-500`),
      ...
    }
   </article.code>
