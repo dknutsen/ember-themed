@@ -105,4 +105,14 @@ module('Integration | Modifier | themed', function(hooks) {
     // assert changing variant changes to the new style/variant in the current theme
     onlyHasStyle(assert, '#modified', this.emberThemed, 'dark', 'card-blue');
   });
+
+  test('it allows overriding theme on a per-instance basis', async function(assert) {
+    await render(hbs`<div id="modified" {{themed "card" "red" theme="dark"}}></div>`);
+    this.emberThemed = this.owner.lookup('service:ember-themed');
+
+    this.emberThemed.setTheme('light');
+
+    // assert applying style with variant works as expected
+    onlyHasStyle(assert, '#modified', this.emberThemed, 'dark', 'card', 'red');
+  });
 });
