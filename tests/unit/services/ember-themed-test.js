@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, test, todo } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 module('Unit | Service | ember-themed', function(hooks) {
@@ -82,4 +82,52 @@ module('Unit | Service | ember-themed', function(hooks) {
       assert.equal(service.getThemeStyle('some-theme', 'coolest'), 'default-style');
     });
   });
+
+  module('setTheme action', function() {
+    test('it sets the current theme correctly when invoked', function(assert) {
+      let service = this.owner.lookup('service:ember-themed');
+      const expectedTheme = 'super-duper-theme';
+      service.setTheme(expectedTheme);
+      assert.equal(service._currentTheme, 'super-duper-theme');
+    });
+  });
+
+  module('_defaultTheme', function() {
+    todo('if matchSystemTheme is true, it matches the preferred system theme first (before using defaultTheme)', function(assert) {
+      let service = this.owner.lookup('service:ember-themed');
+      service.themes = {
+        light: { default: 'light-no-op' },
+        dark: { default: 'dark-no-op' },
+      };
+      // TODO: mock window.matchMedia
+      service.matchSystemTheme = true;
+      service.defaultTheme = 'light';
+      service.darkTheme = 'dark';
+      service.lightTheme = 'light';
+      // TODO: assert that the theme returned matches the mocked matchMedia setting
+    });
+
+    test('if matchSystemTheme is false and defaultTheme is set, it returns the default theme', function(assert) {
+      let service = this.owner.lookup('service:ember-themed');
+      service.themes = {
+        light: { default: 'light-no-op' },
+        dark: { default: 'dark-no-op' },
+      };
+      service.matchSystemTheme = false;
+      service.defaultTheme = 'light';
+      assert.equal(service._defaultTheme, 'light');
+    });
+
+    test('if matchSystemTheme is false and defaultTheme is not set, it returns the first theme', function(assert) {
+      let service = this.owner.lookup('service:ember-themed');
+      service.themes = {
+        light: { default: 'light-no-op' },
+        dark: { default: 'dark-no-op' },
+      };
+      service.matchSystemTheme = false;
+      service.defaultTheme = null;
+      assert.equal(service._defaultTheme, 'light');
+    });
+  });
+
 });
