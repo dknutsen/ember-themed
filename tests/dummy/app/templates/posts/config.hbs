@@ -93,9 +93,11 @@ export default class ThemeChooserComponent extends Component {
   <article.paragraph>
     Note that this is only defining color classes, it is probably best to set layout and border size on the component itself as they probably won't change between themes (though they could be set here if you wanted). See the resulting callout here using this simple invocation: <UI::InlineCode @code="&lt;UI::Callout \{{themed 'callout'}}&gt;This is a sample callout&lt;/UI::Callout&gt;"/>
   </article.paragraph>
-  <UI::Callout {{themed "callout" "default"}} class="mb-4 w-64 mx-auto">
-    This is a sample callout
-  </UI::Callout>
+  <UI::Demo>
+    <UI::Callout {{themed "callout" "default"}}>
+      This is a sample callout
+    </UI::Callout>
+  </UI::Demo>
   <article.paragraph>
     Also notice how it changes if you change the current theme via the theme chooser in the navbar.
   </article.paragraph>
@@ -161,17 +163,19 @@ export default class ThemeChooserComponent extends Component {
     The variant can also be a dynamic value. Below is an example of a callout with a dynamically selectable variant. Again, notice how the color changes not only based on variant but also based on the selected theme (selectable via the theme chooser in the navbar).
   </article.paragraph>
 
-  <UI::Callout {{themed "callout" this.calloutVariant}}>
-    <div class="flex justify-between items-center">
-      This callout is using the "callout" style with dynamic variant, try changing the variant with the select:
-      <UI::Select @onChange={{action (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
-        <stuff.option @label="default" @value="default" />
-        <stuff.option @label="primary" @value="primary" />
-        <stuff.option @label="success" @value="success" />
-        <stuff.option @label="warning" @value="warning" />
-        <stuff.option @label="danger" @value="danger" />
-      </UI::Select>
-    </div>
-  </UI::Callout>
+  <UI::Demo>
+    <UI::Callout {{themed "callout" this.calloutVariant}}>
+      <div class="flex justify-between items-center">
+        This callout is using the "callout" style with dynamic variant, try changing the variant with the select:
+        <UI::Select @onChange={{action (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
+          <stuff.option @label="default" @value="default" />
+          <stuff.option @label="primary" @value="primary" />
+          <stuff.option @label="success" @value="success" />
+          <stuff.option @label="warning" @value="warning" />
+          <stuff.option @label="danger" @value="danger" />
+        </UI::Select>
+      </div>
+    </UI::Callout>
+  </UI::Demo>
 
 </UI::Article>
