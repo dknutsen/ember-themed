@@ -14,8 +14,40 @@ env:
   NODE_VERSION: 14
 
 jobs:
-  build-app:
+  lint-app:
+    name: Lint files and dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Check out a copy of the repo
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache npm cache and node_modules
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-${{ env.NODE_VERSION }}-
+
+      - name: Install dependencies
+        run: npm install
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+
+      - name: Lint
+        run: npm run lint
+
+
+  test-app:
     name: Build app for testing
+    needs: [lint-app]
     runs-on: ubuntu-latest
     timeout-minutes: 7
     steps:
@@ -50,78 +82,13 @@ jobs:
           name: dist
           path: dist
 
-
-  lint:
-    name: Lint files and dependencies
-    runs-on: ubuntu-latest
-    timeout-minutes: 7
-    steps:
-      - name: Check out a copy of the repo
-        uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache npm cache and node_modules
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            node_modules
-          key: ${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-${{ env.NODE_VERSION }}-
-
-      - name: Install dependencies
-        run: npm install
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-
-      - name: Lint
-        run: npm run lint
-
-
-  test-app:
-    name: Test app
-    needs: [build-app]
-    runs-on: ubuntu-latest
-    timeout-minutes: 7
-    steps:
-      - name: Check out a copy of the repo
-        uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache npm cache and node_modules
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            node_modules
-          key: ${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-${{ env.NODE_VERSION }}-
-
-      - name: Install dependencies
-        run: npm install
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-
-      - name: Download app
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-
       - name: Test
         run: npm run test:ember-compatibility ${{ matrix.scenario }}
 
 
   test-compatibility:
     name: Test compatibility
+    needs: [lint-app]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -154,12 +121,6 @@ jobs:
       - name: Install dependencies
         run: npm install
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
-
-      - name: Download app
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
 
       # Test compatibility with ember-try
       - name: Test
