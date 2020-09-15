@@ -98,6 +98,9 @@ jobs:
           - 'ember-release'
           - 'ember-beta'
           - 'ember-canary'
+          - 'ember-default-with-jquery'
+          - 'ember-classic'
+          - 'embroider-tests'
     timeout-minutes: 7
     steps:
       - name: Check out a copy of the repo
