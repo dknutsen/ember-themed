@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": 0,
   "packages": [
     {
       "name": "ember-cli",
-      "version": "3.20.0",
+      "version": "3.21.2",
       "blueprints": [
         {
           "name": "addon",

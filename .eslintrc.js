@@ -38,7 +38,8 @@ module.exports = {
         'addon/**',
         'addon-test-support/**',
         'app/**',
-        'tests/dummy/app/**'
+        'tests/dummy/app/**',
+        'tests/dummy/app/tailwind/config.js'
       ],
       parserOptions: {
         sourceType: 'script'

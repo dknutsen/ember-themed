@@ -167,7 +167,7 @@ export default class ThemeChooserComponent extends Component {
     <UI::Callout {{themed "callout" this.calloutVariant}}>
       <div class="flex justify-between items-center">
         This callout is using the "callout" style with dynamic variant, try changing the variant with the select:
-        <UI::Select @onChange={{action (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
+        <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
           <stuff.option @label="default" @value="default" />
           <stuff.option @label="primary" @value="primary" />
           <stuff.option @label="success" @value="success" />

@@ -46,7 +46,7 @@ const onlyHasStyle = function(assert, element, service, theme, style, variant = 
 module('Integration | Modifier | themed', function(hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function(assert) {
+  hooks.beforeEach(function() {
     this.owner.register('service:ember-themed', ThemedStub);
   });
 

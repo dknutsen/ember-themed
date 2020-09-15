@@ -1,3 +1,4 @@
+/* global module */
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,

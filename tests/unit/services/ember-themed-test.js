@@ -93,7 +93,7 @@ module('Unit | Service | ember-themed', function(hooks) {
   });
 
   module('_defaultTheme', function() {
-    todo('if matchSystemTheme is true, it matches the preferred system theme first (before using defaultTheme)', function(assert) {
+    todo('if matchSystemTheme is true, it matches the preferred system theme first (before using defaultTheme)', function(/*assert*/) {
       let service = this.owner.lookup('service:ember-themed');
       service.themes = {
         light: { default: 'light-no-op' },
