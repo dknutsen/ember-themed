@@ -42,7 +42,7 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
 
       - name: Build app
-        run: npm run build:test
+        run: npm run build
 
       - name: Upload app
         uses: actions/upload-artifact@v2
