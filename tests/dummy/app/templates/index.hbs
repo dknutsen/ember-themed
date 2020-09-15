@@ -16,7 +16,7 @@
     <UI::Callout {{themed "callout" this.calloutVariant}}>
       <div class="flex justify-between items-center">
         Notice how this callout color variant can be changed, and it responds when the theme is changed as well (navbar right)
-        <UI::Select @onChange={{action (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
+        <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
           <stuff.option @label="default" @value="default" />
           <stuff.option @label="primary" @value="primary" />
           <stuff.option @label="success" @value="success" />
