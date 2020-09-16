@@ -124,4 +124,4 @@ jobs:
 
       # Test compatibility with ember-try
       - name: Test
-        run: ember try:one ${{ matrix.scenario }}
+        run: npm run test:single-scenario ${{ matrix.scenario }}
