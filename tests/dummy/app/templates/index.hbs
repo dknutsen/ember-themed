@@ -5,11 +5,11 @@
 
 <UI::Article class="mb-16" as |article|>
   <article.paragraph>
-    Welcome to the docs and demo for ember-themed! Using a simple modifier-based approach to theming can be as simple as the following code:
+    Welcome to the docs and demo for ember-themed! Using a modifier-based approach can make theming as simple as the following code:
   </article.paragraph>
   <UI::Demo class="mb-4">
     <article.code>
-&lt;div \{{themed "callout" this.variant}} ...attributes&gt;
+&lt;div \{{themed "callout" @variant}} ...attributes&gt;
   \{{yield}}
 &lt;/div&gt;
     </article.code>
@@ -27,7 +27,7 @@
     </UI::Callout>
   </UI::Demo>
   <article.paragraph>
-    Check out the documentation below for details on configuring or checkout the <a class="underline" href="https://github.com/dknutsen/ember-themed/tree/master/tests/dummy/app">dummy app source</a>.
+    Check out the documentation below for details on configuring or take a peek at the <a class="underline" href="https://github.com/dknutsen/ember-themed/tree/master/tests/dummy/app">dummy app source</a>.
   </article.paragraph>
 </UI::Article>
 
