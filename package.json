@@ -6,7 +6,7 @@
     "ember-addon"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/@dknutsen"
   },
   "repository": "https://github.com/dknutsen/ember-themed",
   "license": "MIT",
