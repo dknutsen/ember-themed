@@ -1,6 +1,6 @@
 {
   "name": "ember-themed",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Lightweight Ember addon for easily adding and changing visual themes.",
   "keywords": [
     "ember-addon"
