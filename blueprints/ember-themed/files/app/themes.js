@@ -23,4 +23,5 @@ export default {
     red: 'transition duration-500 ease-in-out bg-red-600 text-white',
     orange: 'transition duration-500 ease-in-out bg-orange-600 text-white',
   }
+  */
 };
