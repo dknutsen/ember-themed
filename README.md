@@ -1,5 +1,6 @@
 [![This project uses GitHub Actions for continuous integration.](https://github.com/dknutsen/ember-themed/workflows/CI/badge.svg)](https://github.com/dknutsen/ember-themed/actions?query=workflow%3ACI)
 [![npm version](https://badge.fury.io/js/ember-themed.svg)](https://badge.fury.io/js/ember-themed)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-themed.svg)](https://emberobserver.com/addons/ember-themed)
 
 ember-themed
 ==============================================================================
