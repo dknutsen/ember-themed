@@ -11,7 +11,7 @@
 // app/themes.js
 export default {
   dark: {
-    default: 'bg-gray-900 text-white transition duration-500 ease-in-out',
+    default: 'bg-gray-900 text-white',
   }
 }
   </article.code>
@@ -21,7 +21,7 @@ export default {
   <article.code>
 // app/services/ember-themed.js
 export default class ThemeService extends EmberThemedService {
-  defaultTheme = 'light';
+  defaultTheme = 'dark';
   ...
 }
   </article.code>
@@ -62,7 +62,8 @@ import { inject as service } from '@ember/service';
 export default class ThemeChooserComponent extends Component {
   @service emberThemed;
 }
-
+  </article.code>
+  <article.code>
 // app/components/theme-chooser.hbs
 &lt;UI::Select
   @onChange=\{{this.emberThemed.setTheme}}
@@ -78,7 +79,7 @@ export default class ThemeChooserComponent extends Component {
 
   <article.subheading @label="Defining Alternate Styles" />
   <article.paragraph>
-    Each theme has a default style which may work for a lot of the basic text content in an app, but there are number of cases where you may want to apply different color styles to some elements or components. For example a callout alert might require a colored background, colored text, and a colored left border that are all different from the default style. For these cases you can define alternate styles under each theme. Just like the default style they are keyed by name and the value must be either a string of space delimited CSS classes, or an array of CSS classes. For example in the fictional "orange sunshine" theme we could define a style specifically for an outline-style button:
+    Each theme has a default style which may work for a lot of the basic text content in an app, but there are number of cases where you may want to apply different color styles to some elements or components. For example a callout alert might require a colored background, colored text, and a colored left border that are all different from the default style. For these cases you can define alternate styles under each theme. Just like the default style they are keyed by name and the value must be either a string of space delimited CSS classes, or an array of CSS classes.
   </article.paragraph>
   <article.paragraph>
     For example if we had a callout alert component and wanted to theme it, we could add a "light" theme style for it like this:

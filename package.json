@@ -1,13 +1,10 @@
 {
   "name": "ember-themed",
   "version": "1.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Lightweight Ember addon for easily adding and changing visual themes.",
   "keywords": [
     "ember-addon"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "repository": "https://github.com/dknutsen/ember-themed",
   "license": "MIT",
   "author": "Dan Knutsen",
