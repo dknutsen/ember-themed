@@ -12,4 +12,5 @@ Router.map(function() {
     this.route('config');
     this.route('usage');
   });
+  this.route('examples');
 });
