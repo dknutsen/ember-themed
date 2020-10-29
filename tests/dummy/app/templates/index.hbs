@@ -1,52 +1,54 @@
-<UI::Hero
-  @title="Ember Themed"
-  @subtitle="Simple, declarative theming support for your Ember app"
-/>
-
-<UI::Article class="mb-16" as |article|>
-  <article.paragraph>
-    Welcome to the docs and demo for ember-themed! Using a modifier-based approach can make theming as simple as the following code:
-  </article.paragraph>
-  <UI::Demo class="mb-4">
-    <article.code>
-&lt;div \{{themed "callout" @variant}} ...attributes&gt;
-  \{{yield}}
-&lt;/div&gt;
-    </article.code>
-    <UI::Callout {{themed "callout" this.calloutVariant}}>
-      <div class="flex justify-between items-center">
-        Notice how this callout color variant can be changed, and it responds when the theme is changed as well (navbar right)
-        <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
-          <stuff.option @label="default" @value="default" />
-          <stuff.option @label="primary" @value="primary" />
-          <stuff.option @label="success" @value="success" />
-          <stuff.option @label="warning" @value="warning" />
-          <stuff.option @label="danger" @value="danger" />
-        </UI::Select>
-      </div>
-    </UI::Callout>
-  </UI::Demo>
-  <article.paragraph>
-    Check out the documentation below for details on configuring or take a peek at the <a class="underline" href="https://github.com/dknutsen/ember-themed/tree/master/tests/dummy/app">dummy app source</a>.
-  </article.paragraph>
-</UI::Article>
-
-<UI::ArticleList as |list|>
-  <list.article
-    @route="posts.intro"
-    @title="Introduction"
-    @snippet="An introduction to the basic concepts and how to get started"
+<main class="px-4 md:px-0 md:w-2/3 lg:w-1/2 mx-auto">
+  <UI::Hero
+    @title="Ember Themed"
+    @subtitle="Simple, declarative theming support for your Ember app"
   />
-  <list.article
-    @route="posts.config"
-    @title="Configuring themes"
-    @snippet="A more detailed look at configuring themes"
-  />
-  <list.article
-    @route="posts.usage"
-    @title="Applying themes"
-    @snippet="A more detailed look at applying the configured themes with the themed modifier"
-  />
-</UI::ArticleList>
 
-{{outlet}}
+  <UI::Article class="mb-16" as |article|>
+    <article.paragraph>
+      Welcome to the docs and demo for ember-themed! Using a modifier-based approach can make theming as simple as the following code:
+    </article.paragraph>
+    <UI::Demo class="mb-4">
+      <article.code>
+  &lt;div \{{themed "callout" @variant}} ...attributes&gt;
+    \{{yield}}
+  &lt;/div&gt;
+      </article.code>
+      <UI::Callout {{themed "callout" this.calloutVariant}}>
+        <div class="flex justify-between items-center">
+          Notice how this callout color variant can be changed, and it responds when the theme is changed as well (navbar right)
+          <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
+            <stuff.option @label="default" @value="default" />
+            <stuff.option @label="primary" @value="primary" />
+            <stuff.option @label="success" @value="success" />
+            <stuff.option @label="warning" @value="warning" />
+            <stuff.option @label="danger" @value="danger" />
+          </UI::Select>
+        </div>
+      </UI::Callout>
+    </UI::Demo>
+    <article.paragraph>
+      Check out the documentation below for details on configuring or take a peek at the <a class="underline" href="https://github.com/dknutsen/ember-themed/tree/master/tests/dummy/app">dummy app source</a>.
+    </article.paragraph>
+  </UI::Article>
+
+  <UI::ArticleList as |list|>
+    <list.article
+      @route="posts.intro"
+      @title="Introduction"
+      @snippet="An introduction to the basic concepts and how to get started"
+    />
+    <list.article
+      @route="posts.config"
+      @title="Configuring themes"
+      @snippet="A more detailed look at configuring themes"
+    />
+    <list.article
+      @route="posts.usage"
+      @title="Applying themes"
+      @snippet="A more detailed look at applying the configured themes with the themed modifier"
+    />
+  </UI::ArticleList>
+
+  {{outlet}}
+</main>

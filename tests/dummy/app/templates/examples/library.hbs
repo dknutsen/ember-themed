@@ -1,0 +1,36 @@
+<UI::Article @title="Component Library" as |article|>
+
+  <article.paragraph>
+    This is an example of an interactive component library
+  </article.paragraph>
+
+  <article.subheading @label="Alert" />
+
+  <UI::Select @onChange={{fn (mut this.alertVariant)}} @value={{this.alertVariant}} {{themed}} as |stuff|>
+    <stuff.option @label="default" @value="default" />
+    <stuff.option @label="primary" @value="primary" />
+    <stuff.option @label="success" @value="success" />
+    <stuff.option @label="warning" @value="warning" />
+    <stuff.option @label="danger" @value="danger" />
+  </UI::Select>
+
+  <UI::Alert @text="This is a simple alert" {{themed "callout" alertVariant}}/>
+
+  <article.code>
+&lt;UI::Alert @text="This is a simple alert" {{concat '{{themed "callout" "' this.alertVariant '"}}'}}/&gt;
+  </article.code>
+
+
+  <article.subheading @label="Button" />
+
+
+  <article.subheading @label="Badge" />
+
+
+  <article.subheading @label="Callout" />
+
+
+  <article.subheading @label="Card" />
+
+
+</UI::Article>
