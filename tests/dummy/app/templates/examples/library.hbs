@@ -6,31 +6,87 @@
 
   <article.subheading @label="Alert" />
 
+  Choose an alert type:
   <UI::Select @onChange={{fn (mut this.alertVariant)}} @value={{this.alertVariant}} {{themed}} as |stuff|>
-    <stuff.option @label="default" @value="default" />
-    <stuff.option @label="primary" @value="primary" />
-    <stuff.option @label="success" @value="success" />
-    <stuff.option @label="warning" @value="warning" />
-    <stuff.option @label="danger" @value="danger" />
+    {{#each emberThemed.variantNames as |variant|}}
+      <stuff.option @label={{variant}} @value={{variant}} />
+    {{/each}}
   </UI::Select>
 
-  <UI::Alert @text="This is a simple alert" {{themed "callout" alertVariant}}/>
-
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Simple Alert</h3>
+  <article.paragraph>
+    This form of the alert simple renders a string label
+  </article.paragraph>
+  <UI::Alert class="mb-4" @text="This is a simple alert" {{themed "colored" alertVariant}}/>
   <article.code>
-&lt;UI::Alert @text="This is a simple alert" {{concat '{{themed "callout" "' this.alertVariant '"}}'}}/&gt;
+&lt;UI::Alert @text="This is a simple alert" {{concat '{{themed "colored" "' this.alertVariant '"}}'}}/&gt;
+  </article.code>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Block Form Alert</h3>
+  <article.paragraph>
+    This form of the alert accepts a block to render any content within the alert
+  </article.paragraph>
+  <UI::Alert class="mb-4 flex justify-between items-center" {{themed "colored" alertVariant}}>
+    This alert can hold anything, like a button! <UI::Button @label="Some Button" {{themed "colored" "primary"}}/>
+  </UI::Alert>
+  <article.code>
+&lt;UI::Alert {{concat '{{themed "colored" "' this.alertVariant '"}}'}}/&gt;
+  This alert can hold anything, like a button! &lt;UI::Button @label="Some Button"/&gt;
+&lt;/UI::Alert&gt;
   </article.code>
 
 
+
   <article.subheading @label="Button" />
+
+  <div>
+  Choose a button type:
+  <UI::Select @onChange={{fn (mut this.buttonVariant)}} @value={{this.buttonVariant}} {{themed}} as |stuff|>
+    {{#each emberThemed.variantNames as |variant|}}
+      <stuff.option @label={{variant}} @value={{variant}} />
+    {{/each}}
+  </UI::Select>
+  </div>
+
+  <div>
+  Choose a button style:
+  <UI::Select @onChange={{fn (mut this.buttonStyle)}} @value={{this.buttonStyle}} {{themed}} as |stuff|>
+    {{#each (array "solid" "outline") as |style|}}
+      <stuff.option @label={{style}} @value={{style}} />
+    {{/each}}
+  </UI::Select>
+  </div>
+
+  <div>
+  Choose a button size:
+  <UI::Select @onChange={{fn (mut this.buttonSize)}} @value={{this.buttonSize}} {{themed}} as |stuff|>
+    {{#each (array "default" "md" "lg") as |size|}}
+      <stuff.option @label={{size}} @value={{size}} />
+    {{/each}}
+  </UI::Select>
+  </div>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Standard Button</h3>
+  <article.paragraph>
+    This is the normal form of a button with background color and no border.
+  </article.paragraph>
+  <UI::Button class="mb-4" @label="Button" @size={{this.buttonSize}} {{themed "colored" buttonVariant}}/>
+  <article.code>
+&lt;UI::Button @label="Button" {{concat '{{themed "button" "' this.buttonVariant '"}}'}}/&gt;
+  </article.code>
+
 
 
   <article.subheading @label="Badge" />
 
 
+
   <article.subheading @label="Callout" />
 
 
+
   <article.subheading @label="Card" />
+
 
 
 </UI::Article>
