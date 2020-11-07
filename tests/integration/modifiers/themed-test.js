@@ -121,6 +121,7 @@ module('Integration | Modifier | themed', function(hooks) {
     this.emberThemed = this.owner.lookup('service:ember-themed');
 
     this.set('extraClass', 'new-class');
+    await settled();
 
     ['new-class', 'light-brand-color', 'light-brand-text'].forEach(className => {
       assert.dom('#modified').hasClass(className);
