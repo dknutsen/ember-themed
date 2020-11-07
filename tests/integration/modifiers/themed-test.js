@@ -120,10 +120,10 @@ module('Integration | Modifier | themed', function(hooks) {
     await render(hbs`<div id="modified" class={{this.extraClass}} {{themed "branded"}}></div>`);
     this.emberThemed = this.owner.lookup('service:ember-themed');
 
-    this.set('extraClass', 'new-class');
+    this.set('extraClass', 'extra-class');
     await settled();
 
-    ['new-class', 'light-brand-color', 'light-brand-text'].forEach(className => {
+    ['extra-class', 'light-brand-color', 'light-brand-text'].forEach(className => {
       assert.dom('#modified').hasClass(className);
     });
   });
