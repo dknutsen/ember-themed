@@ -115,4 +115,16 @@ module('Integration | Modifier | themed', function(hooks) {
     // assert applying style with variant works as expected
     onlyHasStyle(assert, '#modified', this.emberThemed, 'dark', 'card', 'red');
   });
+
+  test('modifying css classes on the element does not clobber the theme classes', async function(assert) {
+    await render(hbs`<div id="modified" class={{this.extraClass}} {{themed "branded"}}></div>`);
+    this.emberThemed = this.owner.lookup('service:ember-themed');
+
+    this.set('extraClass', 'extra-class');
+    await settled();
+
+    ['extra-class', 'light-brand-color', 'light-brand-text'].forEach(className => {
+      assert.dom('#modified').hasClass(className);
+    });
+  });
 });
