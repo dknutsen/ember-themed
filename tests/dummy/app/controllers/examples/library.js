@@ -6,4 +6,7 @@ export default class ExamplesLibraryController extends Controller {
 
   alertVariant = 'default';
   buttonVariant = 'default';
+  badgeVariant = 'default';
+  calloutVariant = 'default';
+  cardVariant = 'default';
 }

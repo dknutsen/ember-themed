@@ -1,1 +1,13 @@
-{{yield}}
+<div>
+  {{#if @title}}
+    <UI::Card::Header @title={{@title}} @theme={{@theme}} />
+    <UI::Card::Body @theme={{@theme}}>
+      {{yield}}
+    </UI::Card::Body>
+  {{else}}
+    {{yield (hash
+      header=(component "u-i/card/header" theme=@theme)
+      body=(component "u-i/card/body" theme=@theme)
+    )}}
+  {{/if}}
+</div>
