@@ -1,6 +1,6 @@
 import generateVariants from 'ember-themed/utils/generate-variants';
 
-const transition = 'transition-colors duration-1000 ease-in-out';
+export const transition = 'transition-colors duration-1000 ease-in-out';
 
 export const variants = {
   default: 'gray',

@@ -1,5 +1,6 @@
 import EmberThemedService from 'ember-themed/services/ember-themed';
 import themes, { variants } from 'dummy/themes';
+import { tracked } from '@glimmer/tracking';
 import { TrackedObject } from 'tracked-built-ins';
 
 // make sure our themes object is tracked since we'll be doing some crazy stuff with it
@@ -18,7 +19,7 @@ export default class ThemeService extends EmberThemedService {
 
   // Set your themes on the service, you could also define them here instead of in the
   // themes.js file if you choose
-  themes = trackedThemes;
+  @tracked themes = trackedThemes;
 
   // misc stuff for the dummy app
   variantNames = Object.keys(variants);
