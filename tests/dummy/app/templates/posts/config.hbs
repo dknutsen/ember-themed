@@ -112,14 +112,14 @@ export default class ThemeChooserComponent extends Component {
     Note that this is only defining color classes, it is probably best to set layout and border size on the component itself as they probably won't change between themes (though they could be set here if you wanted). See the resulting callout here using this simple invocation: <UI::InlineCode @code="&lt;UI::Callout \{{themed 'callout'}}&gt;This is a sample callout&lt;/UI::Callout&gt;"/>
   </article.paragraph>
   <UI::Demo>
-    <UI::Callout {{themed "callout" "default"}}>
+    <UI::Callout>
       This is a sample callout
     </UI::Callout>
   </UI::Demo>
   <article.paragraph>
     Also notice how it changes if you change the current theme via the theme chooser in the navbar.
   </article.paragraph>
-  <UI::Callout {{themed "callout" "primary"}}>
+  <UI::Callout @color="primary">
     It is recommended that if you define a style in one theme you define the same style in all other themes. If a style cannot be found in the current theme the modifier will choose the default style.
   </UI::Callout>
 
@@ -182,10 +182,10 @@ export default class ThemeChooserComponent extends Component {
   </article.paragraph>
 
   <UI::Demo>
-    <UI::Callout {{themed "callout" this.calloutVariant}}>
+    <UI::Callout @color={{this.calloutVariant}}>
       <div class="flex justify-between items-center">
         This callout is using the "callout" style with dynamic variant, try changing the variant with the select:
-        <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
+        <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} as |stuff|>
           <stuff.option @label="default" @value="default" />
           <stuff.option @label="primary" @value="primary" />
           <stuff.option @label="success" @value="success" />

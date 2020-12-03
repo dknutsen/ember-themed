@@ -2,6 +2,7 @@
   class="py-1 px-2 m-2 rounded leading-tight focus:outline-none border"
   ...attributes
   {{on "change" (pick "target.value" @onChange)}}
+  {{themed "select"}}
 >
   {{yield (hash option=(component "u-i/select/option" currentValue=@value))}}
 </select>

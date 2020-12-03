@@ -1,13 +1,14 @@
-<div>
+<div class="shadow" ...attributes>
   {{#if @title}}
-    <UI::Card::Header @title={{@title}} @theme={{@theme}} />
-    <UI::Card::Body @theme={{@theme}}>
-      {{yield}}
-    </UI::Card::Body>
+    <UI::Card::Header @title={{@title}} @color={{@color}} />
+    {{yield (hash
+      Body=(component "u-i/card/body" color=@color)
+      Toolbar=(component "u-i/card/toolbar")
+    )}}
   {{else}}
     {{yield (hash
-      header=(component "u-i/card/header" theme=@theme)
-      body=(component "u-i/card/body" theme=@theme)
+      Header=(component "u-i/card/header" color=@color)
+      Body=(component "u-i/card/body" color=@color)
     )}}
   {{/if}}
 </div>

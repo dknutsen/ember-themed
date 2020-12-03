@@ -14,7 +14,7 @@
     \{{yield}}
   &lt;/div&gt;
       </article.code>
-      <UI::Callout {{themed "callout" this.calloutVariant}}>
+      <UI::Callout @color={{this.calloutVariant}}>
         <div class="flex justify-between items-center">
           Notice how this callout color variant can be changed, and it responds when the theme is changed as well (navbar right)
           <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
