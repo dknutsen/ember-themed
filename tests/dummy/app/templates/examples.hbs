@@ -1,5 +1,5 @@
 <div class="lg:flex">
-  <nav class="w-64 p-2">
+  <nav class="w-56 p-2">
     {{#let
       "p-2 block"
       "font-bold"
@@ -10,7 +10,7 @@
       <LinkTo @route="examples.experiments" @activeClass={{activeClass}} class={{class}}>Experiments</LinkTo>
     {{/let}}
   </nav>
-  <main class="p-4 xl:w-1/2">
+  <main class="p-4 lg:w-3/4 xl:w-2/3">
     {{outlet}}
   </main>
 </div>
