@@ -8,4 +8,6 @@ export default class ExperimentsController extends Controller {
   height = 'small';
   y = null;
   x = null;
+
+  gallerySize = 'small';
 }
