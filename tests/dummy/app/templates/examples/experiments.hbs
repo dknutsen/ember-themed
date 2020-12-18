@@ -1,0 +1,88 @@
+<UI::Article @title="Experiments" as |article|>
+
+  <article.paragraph>
+    This page demonstrates using the modifier for "off-color" uses, that is, changing CSS attributes other than color. While not necessarily recommended this introduces some fun possibilities.
+  </article.paragraph>
+
+  <article.subheading @label="Changing size and translation using variants" />
+  <article.paragraph>
+    In this experiment the inner blue square has four themed modifiers attached (you can attach more than one to the same element!), controlling width, height, vertical translation, and horizontal translation. Obviously this could be accomplished fairly easily without the modifier but perhaps you can imagine more complex class lists.
+  </article.paragraph>
+  <article.paragraph>
+    This particular experiment is using different variants all within the same theme.
+  </article.paragraph>
+  <div>
+    Width:
+    <UI::Select @onChange={{fn (mut this.width)}} @value={{this.width}} as |stuff|>
+      {{#each this.emberThemed.sizeVariants as |variant|}}
+        <stuff.option @label={{variant}} @value={{variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+  <div>
+    Width:
+    <UI::Select @onChange={{fn (mut this.height)}} @value={{this.height}} as |stuff|>
+      {{#each this.emberThemed.sizeVariants as |variant|}}
+        <stuff.option @label={{variant}} @value={{variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+  <div>
+    Y Translation:
+    <UI::Select @onChange={{fn (mut this.y)}} @value={{this.y}} as |stuff|>
+      <stuff.option @label="None" @value={{null}} />
+      {{#each (reverse this.emberThemed.sizeVariants) as |variant|}}
+        <stuff.option @label={{concat "up " variant}} @value={{concat "up-" variant}} />
+      {{/each}}
+      {{#each this.emberThemed.sizeVariants as |variant|}}
+        <stuff.option @label={{concat "down " variant}} @value={{concat "down-" variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+  <div class="mb-4">
+    X Translation:
+    <UI::Select @onChange={{fn (mut this.x)}} @value={{this.x}} as |stuff|>
+      <stuff.option @label="None" @value={{null}} />
+      {{#each (reverse this.emberThemed.sizeVariants) as |variant|}}
+        <stuff.option @label={{concat "left " variant}} @value={{concat "left-" variant}} />
+      {{/each}}
+      {{#each this.emberThemed.sizeVariants as |variant|}}
+        <stuff.option @label={{concat "right " variant}} @value={{concat "right-" variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+
+  <UI::Demo class="mb-4">
+    <div class="w-64 h-64 flex items-center justify-center" {{themed "code"}}>
+      <div
+        class="bg-blue-500"
+        {{themed "width" this.width theme="experiments"}}
+        {{themed "height" this.height theme="experiments"}}
+        {{themed this.y theme="experiments"}}
+        {{themed this.x theme="experiments"}}
+      ></div>
+    </div>
+  </UI::Demo>
+
+
+  <article.subheading @label="Changing gallery layout using styles"/>
+  <article.paragraph>
+    This example uses the themed modifier to change a number of properties to toggle a contrived image gallery type view between small and large. It also changes the caption style from below the image to an overlay that appears on hover.
+  </article.paragraph>
+  <UI::Demo class="mb-4">
+    Gallery style:
+    <UI::Select @onChange={{fn (mut this.gallerySize)}} @value={{this.gallerySize}} as |stuff|>
+      <stuff.option @label="Small" @value="small" />
+      <stuff.option @label="Large" @value="large" />
+    </UI::Select>
+    <div class="flex flex-wrap">
+      {{#each (array 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)}}
+        <div {{themed (if (eq this.gallerySize "large") "item-large" "item-small") theme="experiments"}}>
+          <div class="bg-blue-300 w-full h-full"></div>
+          <div {{themed (if (eq this.gallerySize "large") "caption-large" "caption-small") theme="experiments"}}>some caption</div> 
+        </div>
+      {{/each}}
+    </div>
+  </UI::Demo>
+
+</UI::Article>

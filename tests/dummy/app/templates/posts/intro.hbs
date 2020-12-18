@@ -28,7 +28,7 @@ ember install ember-themed
     <Item><UI::InlineCode @code="app/themes.js"/> &mdash; this is where you can defined your themes.</Item>
     <Item><UI::InlineCode @code="app/services/ember-themed.js"/> &mdash; this extends the addon service and hands your themes to it.</Item>
   </article.list>
-  <UI::Callout class="mb-4" {{themed "callout-primary"}}>
+  <UI::Callout class="mb-4" @color="primary">
     <article.paragraph>
       If the default blueprint was unable to run you will need to run it manually with the following command:
     </article.paragraph>

@@ -7,6 +7,7 @@ export default class ThemedModifier extends Modifier {
   _lastTheme = null;
   _lastStyle = null;
   _lastVariant = null;
+  _lastClassList = null;
 
   get style() {
     return this.args.positional[0];
@@ -26,12 +27,13 @@ export default class ThemedModifier extends Modifier {
     if (this._lastVariant !== variant) this._lastVariant = variant;
     if (this._lastTheme !== theme) this._lastTheme = theme;
     const fullLastStyle = _lastStyle ? `${_lastStyle}${_lastVariant ? '-' + _lastVariant : ''}` : null;
-    const toRemove = this.emberThemed.getThemeStyle(_lastTheme, fullLastStyle);
+    const toRemove = this._lastClassList || this.emberThemed.getThemeStyle(_lastTheme, fullLastStyle);
     this.element.classList.remove(...toRemove);
     // add new theme styles
     const fullNewStyle = style ? `${style}${variant ? '-' + variant : ''}` : null;
     const toAdd = this.emberThemed.getThemeStyle(theme, fullNewStyle);
     this.element.classList.add(...toAdd);
+    this._lastClassList = toAdd;
   }
 
   didReceiveArguments() {

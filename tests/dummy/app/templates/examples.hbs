@@ -1,0 +1,16 @@
+<div class="lg:flex">
+  <nav class="w-56 p-2">
+    {{#let
+      "p-2 block"
+      "font-bold"
+      as |class activeClass|
+    }}
+      <LinkTo @route="examples.library" @activeClass={{activeClass}} class={{class}}>Component Library</LinkTo>
+      <LinkTo @route="examples.persistence" @activeClass={{activeClass}} class={{class}}>Persisting Theme</LinkTo>
+      <LinkTo @route="examples.experiments" @activeClass={{activeClass}} class={{class}}>Experiments</LinkTo>
+    {{/let}}
+  </nav>
+  <main class="p-4 lg:w-3/4 xl:w-2/3">
+    {{outlet}}
+  </main>
+</div>

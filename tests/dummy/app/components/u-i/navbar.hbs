@@ -15,12 +15,12 @@
   </div>
 
   <div class="w-full flex-grow md:flex md:items-center md:w-auto {{if this.toggleNav "block" "hidden"}}">
-    <div class="text-sm md:flex-grow">
-      {{!-- main nav links e.g.
-      <LinkTo @route="" class="font-semibold text-xl tracking-tight text-white no-underline">
-      </LinkTo>
-      {{yield}}
-      --}}
+    <div class="text-sm md:flex-grow py-4 lg:py-0">
+      {{#let "border-b-2 border-white" "block lg:inline-block mb-2 lg:mb-0 lg:mr-2 font-semibold tracking-tight text-white no-underline" as |activeClass class|}}
+        <LinkTo @route="index" @activeClass={{activeClass}} class={{class}}>Docs</LinkTo>
+        <LinkTo @route="examples" @activeClass={{activeClass}} class={{class}}>Examples</LinkTo>
+        <a href="https://github.com/dknutsen/ember-themed/tree/master/tests/dummy/app" target="_blank" rel="noreferrer noopener" title="View the source code for this docs site" class={{class}}>Source</a>
+      {{/let}}
     </div>
 
     <div>

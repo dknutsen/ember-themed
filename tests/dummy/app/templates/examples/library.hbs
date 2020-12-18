@@ -1,0 +1,177 @@
+<UI::Article @title="Component Library" as |article|>
+
+  <article.paragraph>
+    This is an example of an interactive component library. Each component manages its theme internally, and can have its theme and other args modified live and the component is rendered. Each example has a code snippet below it to show how it could be invoked to get the same result.
+  </article.paragraph>
+
+  <article.subheading @label="Alert" />
+  <div>
+    Alert type:
+    <UI::Select @onChange={{fn (mut this.alertVariant)}} @value={{this.alertVariant}} as |stuff|>
+      {{#each this.emberThemed.variantNames as |variant|}}
+        <stuff.option @label={{variant}} @value={{variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Simple Alert</h3>
+  <article.paragraph>
+    This form of the alert simple renders a string label
+  </article.paragraph>
+  <UI::Demo class="mb-4">
+    <UI::Alert class="mb-4" @text="This is a simple alert" @color={{this.alertVariant}}/>
+    <article.code>
+&lt;UI::Alert @text="This is a simple alert" @color="{{this.alertVariant}}"/&gt;
+    </article.code>
+  </UI::Demo>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Block Form Alert</h3>
+  <article.paragraph>
+    This form of the alert accepts a block to render any content within the alert
+  </article.paragraph>
+  <UI::Demo class="mb-4">
+    <UI::Alert class="mb-4 flex justify-between items-center" @color={{this.alertVariant}}>
+      This alert can hold anything, like a button! <UI::Button @label="Some Button" @color="primary"/>
+    </UI::Alert>
+    <article.code>
+&lt;UI::Alert @color="{{this.alertVariant}}"&gt;
+  This alert can hold anything, like a button! &lt;UI::Button @label="Some Button"/&gt;
+&lt;/UI::Alert&gt;
+    </article.code>
+  </UI::Demo>
+
+
+
+  <article.subheading @label="Button" />
+
+  <div>
+    Button type:
+    <UI::Select @onChange={{fn (mut this.buttonVariant)}} @value={{this.buttonVariant}} as |stuff|>
+      {{#each this.emberThemed.variantNames as |variant|}}
+        <stuff.option @label={{variant}} @value={{variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+  <div>
+    Button size:
+    <UI::Select @onChange={{fn (mut this.buttonSize)}} @value={{this.buttonSize}} as |stuff|>
+      {{#each (array "default" "md" "lg") as |size|}}
+        <stuff.option @label={{size}} @value={{size}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Standard Button</h3>
+  <article.paragraph>
+    This is the normal form of a button with background color and no border.
+  </article.paragraph>
+  <UI::Demo class="mb-4">
+    <UI::Button class="mb-4" @label="Button" @size={{this.buttonSize}} @color={{this.buttonVariant}}/>
+    <article.code>
+&lt;UI::Button @label="Button" @color="{{this.buttonVariant}}" @size="{{this.buttonSize}}"/&gt;
+    </article.code>
+  </UI::Demo>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Outline Button</h3>
+  <article.paragraph>
+    This is the outline style of a button with background color.
+  </article.paragraph>
+  <UI::Demo class="mb-4">
+    <UI::Button class="mb-4" @label="Button" @size={{this.buttonSize}} @style="outline" @color={{this.buttonVariant}}/>
+    <article.code>
+&lt;UI::Button @label="Button" @style="outline" @color="{{this.buttonVariant}}" @size="{{this.buttonSize}}"/&gt;
+    </article.code>
+  </UI::Demo>
+
+
+
+  <article.subheading @label="Badge" />
+  <div class="mb-4">
+    Badge type:
+    <UI::Select @onChange={{fn (mut this.badgeVariant)}} @value={{this.badgeVariant}} as |stuff|>
+      {{#each this.emberThemed.variantNames as |variant|}}
+        <stuff.option @label={{variant}} @value={{variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+  <UI::Demo class="mb-4">
+    <div class="mb-4">
+      <UI::Badge @label="#badge" @style="outline" @color={{this.badgeVariant}}/>
+    </div>
+    <article.code>
+&lt;UI::Badge @label="#badge" @style="outline" @color="{{this.badgeVariant}}"/&gt;
+    </article.code>
+  </UI::Demo>
+
+
+
+  <article.subheading @label="Callout" />
+  <div>
+    Callout type:
+    <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} as |stuff|>
+      {{#each this.emberThemed.variantNames as |variant|}}
+        <stuff.option @label={{variant}} @value={{variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Simple Callout</h3>
+  <article.paragraph>
+    This form of the callout simple renders a string label
+  </article.paragraph>
+  <UI::Demo class="mb-4">
+    <UI::Callout class="mb-4" @text="This is a simple callout" @color={{this.calloutVariant}}/>
+    <article.code>
+&lt;UI::Callout @text="This is a simple callout" @color="{{this.calloutVariant}}"/&gt;
+    </article.code>
+  </UI::Demo>
+
+  <h3 class="font-sans font-semibold text-lg mb-4 pt-8">Block Form Callout</h3>
+  <article.paragraph>
+    This form of the callout accepts a block to render any content within the callout
+  </article.paragraph>
+  <UI::Demo class="mb-4">
+    <UI::Callout class="mb-4 flex justify-between items-center" @callout={{this.calloutVariant}}>
+      This callout can hold anything, like a button! <UI::Button @label="Some Button" @color="primary"/>
+    </UI::Callout>
+    <article.code>
+&lt;UI::Callout @color="{{this.calloutVariant}}"&gt;
+  This callout can hold anything, like a button! &lt;UI::Button @label="Some Button"/&gt;
+&lt;/UI::Callout&gt;
+    </article.code>
+  </UI::Demo>
+
+
+
+  <article.subheading @label="Card" />
+  <div class="mb-4">
+    Card type:
+    <UI::Select @onChange={{fn (mut this.cardVariant)}} @value={{this.cardVariant}} {{themed "select"}} as |stuff|>
+      {{#each this.emberThemed.variantNames as |variant|}}
+        <stuff.option @label={{variant}} @value={{variant}} />
+      {{/each}}
+    </UI::Select>
+  </div>
+  <UI::Demo class="mb-4">
+    <UI::Card class="mb-4" @title="Some card" @color={{this.cardVariant}} as |Card|>
+      <Card.Body>
+        <p>This card has two parts -- the header and the body -- which are each themed with different "styles" but the same "variant".</p>
+        <Card.Toolbar as |Toolbar|>
+          <Toolbar.Button @label="Nah" @style="outline" {{themed "button-outline" "default"}}/>
+          <Toolbar.Button class="ml-2" @label="Delete!" {{themed "button" "danger"}}/>
+        </Card.Toolbar>
+      </Card.Body>
+    </UI::Card>
+    <article.code>
+&lt;UI::Card @title="Some card" @color="{{this.cardVariant}}" as |Card|&gt;
+  &lt;p&gt;This card has two parts -- the header and the body -- which both are themed with different "styles" but the same "variant".&lt;/p&gt;
+  &lt;Card.Toolbar as |Toolbar|&gt;
+    &lt;Toolbar.Button @label="Nah" @style="outline" \{{themed "button-outline" "default"}}/&gt;
+    &lt;Toolbar.Button @label="Delete!" \{{themed "button" "danger"}}/&gt;
+  &lt;/Card.Toolbar&gt;
+&lt;/UI::Card&gt;
+    </article.code>
+  </UI::Demo>
+
+
+</UI::Article>

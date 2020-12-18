@@ -1,1 +1,11 @@
-{{yield}}
+<div
+  class="
+    flex justify-between items-center
+    p-3
+    rounded-t-lg
+  "
+  {{themed "colored" @color}}
+>
+  <span>{{@title}}</span>
+  {{yield}}
+</div>

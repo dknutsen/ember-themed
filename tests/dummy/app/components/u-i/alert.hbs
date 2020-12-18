@@ -1,4 +1,8 @@
-<div class="px-4 py-2 rounded font-bold" ...attributes>
+<div
+  class="px-4 py-2 rounded font-bold"
+  {{themed "colored" @color}}
+  ...attributes
+>
   {{#if (has-block)}}
     {{yield}}
   {{else}}

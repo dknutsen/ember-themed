@@ -1,1 +1,16 @@
-{{yield}}
+<span
+  class="
+    px-3 py-2
+    rounded-full
+    {{if (eq @size "md") "px-4 py-2 font-bold"}}
+    {{if (eq @size "lg") "px-5 py-3 font-xl font-bold"}}
+  "
+  {{themed "colored" @color}}
+  ...attributes
+>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{@label}}
+  {{/if}}
+</span>

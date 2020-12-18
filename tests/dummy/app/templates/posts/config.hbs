@@ -47,6 +47,23 @@ export default {
   </article.code>
 
 
+  <article.subheading id="config" @label="Matching System Theme" />
+  <article.paragraph>
+    Ember Themed can be easily set up to automatically detect and match the user's OS theme preference (for example light/dark on Mac OS) and default accordingly. To configure this you just need to set some properties on the service. First set <UI::InlineCode @code="matchSystemTheme"/> to true. Then optionally provide <UI::InlineCode @code="lightTheme"/> and <UI::InlineCode @code="darkTheme"/>. If these are not provided the service will attempt to find themes with "light" or "dark" in the name.
+  </article.paragraph>
+  <article.code>
+// app/services/ember-themed.js
+export default class ThemeService extends EmberThemedService {
+  // Tells Ember Themed to check the user's system theme and use light or dark
+  matchSystemTheme = true;
+  // default light/dark themes if matchSystemTheme is true.
+  lightTheme = 'light';
+  darkTheme = 'dark';
+  ...
+}
+  </article.code>
+
+
   <article.subheading id="config" @label="Managing the Current Theme" />
   <article.paragraph>
     Listing available themes and managing the current theme can be done via the <UI::InlineCode @code="emberThemed"/> service. The service provides a property <UI::InlineCode @code="themeNames"/> which returns an array of all defined theme names, a property <UI::InlineCode @code="currentTheme"/> which returns the name of the current theme, and an action <UI::InlineCode @code="setTheme"/> which accepts the name of the theme to switch to. The theme can be changed anywhere the service can be injected, for example a theme chooser component for setting a user selectable theme, or perhaps a route hook for changing theme based on app navigation or routing state.
@@ -95,14 +112,14 @@ export default class ThemeChooserComponent extends Component {
     Note that this is only defining color classes, it is probably best to set layout and border size on the component itself as they probably won't change between themes (though they could be set here if you wanted). See the resulting callout here using this simple invocation: <UI::InlineCode @code="&lt;UI::Callout \{{themed 'callout'}}&gt;This is a sample callout&lt;/UI::Callout&gt;"/>
   </article.paragraph>
   <UI::Demo>
-    <UI::Callout {{themed "callout" "default"}}>
+    <UI::Callout>
       This is a sample callout
     </UI::Callout>
   </UI::Demo>
   <article.paragraph>
     Also notice how it changes if you change the current theme via the theme chooser in the navbar.
   </article.paragraph>
-  <UI::Callout {{themed "callout" "primary"}}>
+  <UI::Callout @color="primary">
     It is recommended that if you define a style in one theme you define the same style in all other themes. If a style cannot be found in the current theme the modifier will choose the default style.
   </UI::Callout>
 
@@ -165,10 +182,10 @@ export default class ThemeChooserComponent extends Component {
   </article.paragraph>
 
   <UI::Demo>
-    <UI::Callout {{themed "callout" this.calloutVariant}}>
+    <UI::Callout @color={{this.calloutVariant}}>
       <div class="flex justify-between items-center">
         This callout is using the "callout" style with dynamic variant, try changing the variant with the select:
-        <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} {{themed}} as |stuff|>
+        <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} as |stuff|>
           <stuff.option @label="default" @value="default" />
           <stuff.option @label="primary" @value="primary" />
           <stuff.option @label="success" @value="success" />

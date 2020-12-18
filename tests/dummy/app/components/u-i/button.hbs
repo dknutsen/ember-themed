@@ -3,11 +3,15 @@
   disabled={{@disabled}}
   class="
     px-2 py-1
-    {{if (eq @size "md") "px-4 py-2"}}
-    {{if (eq @size "lg") "px-5 py-3 font-xl"}}
+    rounded
+    {{if (eq @style "outline") "border"}}
+    {{if (eq @size "md") "px-4 py-2 font-bold"}}
+    {{if (eq @size "lg") "px-5 py-3 font-xl font-bold"}}
     {{if @disabled "opacity-50 cursor-not-allowed"}}
   "
   {{on "click" (optional @onClick)}}
+  {{themed (if (eq @style "outline") "outline-button" "button") @color}}
+  ...attributes
 >
   {{#if (has-block)}}
     {{yield}}
