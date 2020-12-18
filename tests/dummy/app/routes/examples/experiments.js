@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { TrackedObject } from 'tracked-built-ins';
-import themes, { variants } from 'dummy/themes';
+import themes from 'dummy/themes';
 import generateVariants from 'ember-themed/utils/generate-variants';
 
 const sizeVariants = { small: 8, medium: 16, large: 32 };

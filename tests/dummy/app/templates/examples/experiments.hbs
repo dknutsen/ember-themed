@@ -76,7 +76,7 @@
       <stuff.option @label="Large" @value="large" />
     </UI::Select>
     <div class="flex flex-wrap">
-      {{#each (array 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15) as |number|}}
+      {{#each (array 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)}}
         <div {{themed (if (eq this.gallerySize "large") "item-large" "item-small") theme="experiments"}}>
           <div class="bg-blue-300 w-full h-full"></div>
           <div {{themed (if (eq this.gallerySize "large") "caption-large" "caption-small") theme="experiments"}}>some caption</div> 

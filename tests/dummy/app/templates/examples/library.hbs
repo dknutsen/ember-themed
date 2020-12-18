@@ -8,7 +8,7 @@
   <div>
     Alert type:
     <UI::Select @onChange={{fn (mut this.alertVariant)}} @value={{this.alertVariant}} as |stuff|>
-      {{#each emberThemed.variantNames as |variant|}}
+      {{#each this.emberThemed.variantNames as |variant|}}
         <stuff.option @label={{variant}} @value={{variant}} />
       {{/each}}
     </UI::Select>
@@ -47,7 +47,7 @@
   <div>
     Button type:
     <UI::Select @onChange={{fn (mut this.buttonVariant)}} @value={{this.buttonVariant}} as |stuff|>
-      {{#each emberThemed.variantNames as |variant|}}
+      {{#each this.emberThemed.variantNames as |variant|}}
         <stuff.option @label={{variant}} @value={{variant}} />
       {{/each}}
     </UI::Select>
@@ -89,7 +89,7 @@
   <div class="mb-4">
     Badge type:
     <UI::Select @onChange={{fn (mut this.badgeVariant)}} @value={{this.badgeVariant}} as |stuff|>
-      {{#each emberThemed.variantNames as |variant|}}
+      {{#each this.emberThemed.variantNames as |variant|}}
         <stuff.option @label={{variant}} @value={{variant}} />
       {{/each}}
     </UI::Select>
@@ -109,7 +109,7 @@
   <div>
     Callout type:
     <UI::Select @onChange={{fn (mut this.calloutVariant)}} @value={{this.calloutVariant}} as |stuff|>
-      {{#each emberThemed.variantNames as |variant|}}
+      {{#each this.emberThemed.variantNames as |variant|}}
         <stuff.option @label={{variant}} @value={{variant}} />
       {{/each}}
     </UI::Select>
@@ -147,7 +147,7 @@
   <div class="mb-4">
     Card type:
     <UI::Select @onChange={{fn (mut this.cardVariant)}} @value={{this.cardVariant}} {{themed "select"}} as |stuff|>
-      {{#each emberThemed.variantNames as |variant|}}
+      {{#each this.emberThemed.variantNames as |variant|}}
         <stuff.option @label={{variant}} @value={{variant}} />
       {{/each}}
     </UI::Select>

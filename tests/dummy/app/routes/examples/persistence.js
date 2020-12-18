@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { TrackedObject } from 'tracked-built-ins';
-import themes, { transition, variants } from 'dummy/themes';
+import themes, { transition } from 'dummy/themes';
 
 const extraThemes = {
   grape: { default: `bg-purple-800 text-white ${transition}` },
@@ -30,7 +30,7 @@ export default class PersistenceRoute extends Route {
 
   deactivate() {
     // save currently selected theme to local storage
-    const persistedTheme = window.localStorage.setItem('ember-themed:persisted-theme', this.emberThemed.currentTheme);
+    window.localStorage.setItem('ember-themed:persisted-theme', this.emberThemed.currentTheme);
 
     // reset themes back to application defaults
     this.emberThemed.setTheme(this._themeToRestore);
